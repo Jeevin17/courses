@@ -1,39 +1,88 @@
-### 🧠 Neural Network Graph
-This is the heart of the app. I designed a layered, force-directed graph where:
-- **Nodes** represent courses.
-- **Edges** show prerequisites and flow.
-- **Layers** represent the progression from Intro -> Core -> Advanced.
-- It glows and animates as I complete courses!
+# 🎓 OSSU Course Tracker
+
+A comprehensive, interactive course tracker and study companion designed for the Open Source Society University (OSSU) curriculum. Visualize your learning path, track your progress, and stay focused with built-in study tools.
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![React](https://img.shields.io/badge/React-18-blue)
+![Vite](https://img.shields.io/badge/Vite-4.0-purple)
+![Tailwind](https://img.shields.io/badge/Tailwind-3.0-cyan)
+
+## ✨ Features
+
+### 🧠 Interactive Neural Network Graph
+Visualize your learning journey with a stunning, force-directed graph.
+- **Dynamic Nodes**: Courses are represented as nodes that glow upon completion.
+- **Smart Edges**: Clearly see prerequisites and the optimal learning flow.
+- **Layered Progression**: Visual separation from Intro to Advanced topics.
 
 ### 🎯 Focus Mode
-To help me actually study, I built a distraction-free Focus Mode:
-- **Brown Noise Generator**: Built-in audio to mask distractions.
-- **Study Timer**: Customizable Pomodoro-style timer.
-- **Auto-Progress**: It automatically tracks how long I study and updates the course progress bar.
+A distraction-free environment built for deep work.
+- **Brown Noise Generator**: Integrated audio to mask background noise and improve concentration.
+- **Pomodoro Timer**: Customizable study timer to manage your sessions effectively.
+- **Auto-Tracking**: Study sessions automatically update your course progress.
 
-### 📊 Progress Tracking
-- **Automatic**: Time spent in Focus Mode is automatically logged.
-- **Manual**: I can manually add "offline" study time or fix mistakes with the **Undo** feature.
-- **Prerequisites**: The app enforces course order but allows me to **Force Start** a course if I need to skip ahead.
+### 📊 Comprehensive Progress Tracking
+- **Real-time Stats**: Track your completion percentage and study hours.
+- **Flexible Logging**: Automatic logging via Focus Mode or manual entry for offline study.
+- **Prerequisite Management**: Enforces learning order while allowing "Force Start" flexibility.
+- **Data Persistence**: All progress is saved locally—pick up exactly where you left off.
 
-### 💾 Data Persistence
-Everything is saved automatically to my browser's Local Storage. I can close the tab and come back right where I left off.
+## 🛠️ Tech Stack
 
-## Tech Stack
-- **Frontend**: React + Vite
-- **Styling**: Tailwind CSS + Custom Glassmorphism
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
+- **Frontend Framework**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with custom Glassmorphism effects
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-## How to Run
-1. Install dependencies:
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Jeevin17/courses.git
+   cd courses
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
-2. Start the dev server:
+
+3. **Start the development server**
    ```bash
    npm run dev
    ```
+
+4. **Build for production**
+   ```bash
+   npm run build
+   ```
+
+## 📖 Usage
+
+1. **Select a Curriculum**: Choose between OSSU Computer Science, Physics, or other available roadmaps.
+2. **Explore the Graph**: Click on nodes to view course details and prerequisites.
+3. **Start Learning**: Click "Start Course" to begin tracking.
+4. **Enter Focus Mode**: Use the "Study" button to enter the distraction-free zone.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 *Built with ❤️ for the love of learning.*
