@@ -10,7 +10,7 @@ import { roadmapShData } from '../data/roadmap-sh-data';
 import { physicsData } from '../data/physics-data';
 
 export default function Dashboard() {
-    const { progress, theme, toggleTheme, importState, streak, badges, weeklyHours } = useOSSUStore();
+    const { progress, theme, toggleTheme, importState, streak, badges, weeklyHours, announcement } = useOSSUStore();
     const [activeCurriculum, setActiveCurriculum] = useState('ossu'); // 'ossu', 'roadmap-sh', 'physics'
 
     // --- Data Calculation ---
@@ -52,6 +52,17 @@ export default function Dashboard() {
             transition={{ duration: 1, ease: "easeOut" }}
             className="w-full max-w-4xl relative group space-y-8"
         >
+            {/* Global Announcement */}
+            {announcement && (
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-2xl text-center"
+                >
+                    <p className="text-sm text-blue-400 font-medium">{announcement}</p>
+                </motion.div>
+            )}
+
             {/* Central Portal */}
             <div className="glass-portal rounded-[40px] overflow-hidden flex flex-col items-center text-center p-8 md:p-12 transition-all duration-700 group-hover:border-[var(--text-primary)]/20 group-hover:shadow-[0_0_100px_-20px_var(--accent-glow)] relative">
 

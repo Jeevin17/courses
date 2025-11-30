@@ -22,6 +22,7 @@ const StudyMode = lazy(loadStudyMode);
 const GraphView = lazy(loadGraphView);
 const Planner = lazy(() => import('./pages/Planner'));
 const Settings = lazy(() => import('./pages/Settings'));
+const Admin = lazy(() => import('./pages/Admin'));
 const Terms = lazy(loadTerms);
 const Credits = lazy(loadCredits);
 
@@ -74,6 +75,7 @@ function App() {
                                 <Route path="/study" element={<StudyMode />} />
                                 <Route path="/graph" element={<GraphView />} />
                                 <Route path="/settings" element={<Settings />} />
+                                <Route path="/admin" element={<Admin />} />
                                 <Route path="/terms" element={<Terms />} />
                                 <Route path="/credits" element={<Credits />} />
                             </Routes>

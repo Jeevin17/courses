@@ -35,9 +35,12 @@ export default function Terms() {
                     </section>
 
                     <section className="p-6 bg-[var(--glass-surface)] rounded-2xl border border-[var(--glass-border)]">
-                        <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4">3. Data Privacy</h2>
+                        <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4">3. Data Privacy & Cloud Sync</h2>
+                        <p className="mb-4">
+                            We respect your privacy. By default, your progress data is stored locally on your device using LocalStorage.
+                        </p>
                         <p>
-                            We respect your privacy. All progress data is stored locally on your device using LocalStorage. We do not collect, store, or transmit your personal data to any external servers.
+                            If you choose to create an account, your data (progress, notes, settings) will be synced to a secure cloud database (Supabase) to enable cross-device synchronization. We do not sell your data or share it with third parties. You can delete your account and data at any time.
                         </p>
                     </section>
 

@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { ossuData } from '../data/ossu-data';
 import { parseDuration } from '../utils/timeUtils';
+import { supabase } from '../lib/supabase';
+import { encryptData, decryptData } from '../utils/encryption';
 
 const OSSUContext = createContext();
 
@@ -21,6 +23,12 @@ export function OSSUProvider({ children }) {
     const [weeklyHours, setWeeklyHours] = useState(15);
 
     const [isInitialized, setIsInitialized] = useState(false);
+
+    // --- Supabase State ---
+    const [user, setUser] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isSyncing, setIsSyncing] = useState(false);
+    const [announcement, setAnnouncement] = useState('');
 
     // Load data from local storage on mount
     useEffect(() => {
@@ -43,20 +51,168 @@ export function OSSUProvider({ children }) {
             }
         }
         setIsInitialized(true);
+        fetchAnnouncement();
     }, []);
 
-    // Save data to local storage whenever it changes
-    // Save data to local storage whenever it changes (Debounced)
+    const fetchAnnouncement = async () => {
+        try {
+            const { data } = await supabase.from('system_settings').select('value').eq('key', 'announcement').single();
+            if (data) setAnnouncement(data.value);
+        } catch (error) {
+            // Silently fail if Supabase is not configured
+            console.log('Supabase not configured, skipping announcement fetch');
+        }
+    };
+
+    // --- Supabase Auth Listener ---
+    useEffect(() => {
+        try {
+            supabase.auth.getSession().then(({ data: { session } }) => {
+                setUser(session?.user ?? null);
+                if (session?.user) checkAdmin(session.user.id);
+            }).catch(() => {
+                // Silently fail if Supabase is not configured
+            });
+
+            const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+                setUser(session?.user ?? null);
+                if (session?.user) {
+                    checkAdmin(session.user.id);
+                    fetchFromSupabase(session.user.id); // Auto-load on login
+                } else {
+                    setIsAdmin(false);
+                }
+            });
+
+            return () => subscription.unsubscribe();
+        } catch (error) {
+            // Supabase not configured, skip auth
+            console.log('Supabase not configured, skipping auth');
+        }
+    }, []);
+
+    const checkAdmin = async (userId) => {
+        const { data } = await supabase.from('profiles').select('is_admin').eq('id', userId).single();
+        if (data?.is_admin) setIsAdmin(true);
+    };
+
+    // --- Cloud Sync ---
+    const syncToSupabase = async () => {
+        if (!user) return;
+        setIsSyncing(true);
+        try {
+            const payload = {
+                progress, notes, theme, streak, lastStudyDate, badges, schedule, weeklyHours,
+                updated_at: new Date().toISOString()
+            };
+
+            // Encrypt the data before storing
+            const encryptedData = await encryptData(payload, user.email);
+
+            const { error } = await supabase
+                .from('user_progress')
+                .upsert({ user_id: user.id, data: encryptedData }, { onConflict: 'user_id' });
+
+            if (error) throw error;
+            console.log("Synced to Supabase (encrypted)");
+        } catch (error) {
+            console.error("Sync failed:", error);
+        } finally {
+            setIsSyncing(false);
+        }
+    };
+
+    const fetchFromSupabase = async (userId) => {
+        if (!userId || !user) return;
+        setIsSyncing(true);
+        try {
+            const { data, error } = await supabase
+                .from('user_progress')
+                .select('data')
+                .eq('user_id', userId)
+                .single();
+
+            if (error && error.code !== 'PGRST116') throw error; // Ignore 'not found'
+
+            if (data?.data) {
+                // Decrypt the data
+                const decryptedData = await decryptData(data.data, user.email);
+                if (decryptedData) {
+                    importState(decryptedData);
+                    console.log("Loaded from Supabase (decrypted)");
+                }
+            }
+        } catch (error) {
+            console.error("Fetch failed:", error);
+        } finally {
+            setIsSyncing(false);
+        }
+    };
+
+    const deleteAccount = async () => {
+        if (!user) return;
+
+        try {
+            // Delete user progress
+            await supabase.from('user_progress').delete().eq('user_id', user.id);
+
+            // Delete profile
+            await supabase.from('profiles').delete().eq('id', user.id);
+
+            // Delete auth user (requires admin privileges or RPC function)
+            // Note: This requires a custom RPC function in Supabase
+            const { error } = await supabase.rpc('delete_user');
+
+            if (error) throw error;
+
+            // Clear local data
+            localStorage.clear();
+
+            // Sign out
+            await supabase.auth.signOut();
+
+            // Reload page
+            window.location.reload();
+        } catch (error) {
+            console.error("Account deletion failed:", error);
+            throw error;
+        }
+    };
+
+    // Save data to local storage AND Cloud (Debounced)
     useEffect(() => {
         if (!isInitialized) return;
 
         const timeoutId = setTimeout(() => {
             localStorage.setItem(STORAGE_KEY, JSON.stringify({ progress, notes, theme, streak, lastStudyDate, badges, schedule, weeklyHours }));
             document.documentElement.setAttribute('data-theme', theme);
-        }, 1000); // Wait 1 second after last change
+
+            // Auto-sync if logged in
+            if (user) {
+                syncToSupabase();
+            }
+        }, 2000); // Wait 2 seconds (slightly longer for cloud)
 
         return () => clearTimeout(timeoutId);
-    }, [progress, notes, theme, streak, lastStudyDate, badges, schedule, weeklyHours, isInitialized]);
+    }, [progress, notes, theme, streak, lastStudyDate, badges, schedule, weeklyHours, isInitialized, user]);
+
+    // --- Auth Actions ---
+    const login = async (email, password) => {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+    };
+
+    const register = async (email, password) => {
+        const { error } = await supabase.auth.signUp({ email, password });
+        if (error) throw error;
+    };
+
+    const logout = async () => {
+        await supabase.auth.signOut();
+        setUser(null);
+        setIsAdmin(false);
+    };
+
 
     const checkStreak = () => {
         const today = new Date().toISOString().split('T')[0];
@@ -251,6 +407,7 @@ export function OSSUProvider({ children }) {
     return (
         <OSSUContext.Provider value={{
             progress, notes, theme, streak, badges, schedule, weeklyHours,
+            user, isAdmin, isSyncing, announcement, login, register, logout, deleteAccount, syncToSupabase, fetchFromSupabase,
             updateStatus, addStudyTime, setStudyTime, adjustStudyTime, getCourseProgress,
             saveNote, toggleTheme, importState,
             addToSchedule, removeFromSchedule, moveCourse, setWeeklyHours

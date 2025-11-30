@@ -1,14 +1,17 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { useOSSUStore } from '../hooks/useOSSUStore';
 import { ossuData } from '../data/ossu-data';
+import { roadmapShData } from '../data/roadmap-sh-data';
+import { physicsData } from '../data/physics-data';
 import { checkPrerequisites, getPrerequisite } from '../utils/prerequisites';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Check, Lock, Unlock, ZoomIn, ZoomOut, Move, BrainCircuit } from 'lucide-react';
+import { Check, Lock, Unlock, ZoomIn, ZoomOut, Move, BrainCircuit, Book, Activity, Layers } from 'lucide-react';
 
 export default function GraphView() {
     const { progress } = useOSSUStore();
     const navigate = useNavigate();
+    const [activeCurriculum, setActiveCurriculum] = useState('ossu'); // 'ossu', 'roadmap', 'physics'
     const [hoveredNode, setHoveredNode] = useState(null);
     const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
     const containerRef = useRef(null);
@@ -26,47 +29,80 @@ export default function GraphView() {
         const startX = 100;
         const startY = 100;
 
-        // Define Layers
-        const layers = [
-            { id: 'input', title: 'Input Layer', sections: ['intro-cs'] },
-            { id: 'hidden-1', title: 'Core Layer 1', sections: ['core-programming', 'core-math', 'cs-tools'] },
-            { id: 'hidden-2', title: 'Core Layer 2', sections: ['core-systems', 'core-theory', 'core-security', 'core-applications', 'core-ethics'] },
-            { id: 'hidden-3', title: 'Advanced Layer', sections: ['advanced-programming', 'advanced-systems', 'advanced-theory', 'advanced-security', 'advanced-math'] },
-            { id: 'output', title: 'Output Layer', sections: ['final-project'] }
-        ];
+        let layers = [];
+        let currentData = [];
+
+        // Define Layers based on Curriculum
+        if (activeCurriculum === 'ossu') {
+            currentData = ossuData;
+            layers = [
+                { id: 'input', title: 'Input Layer', sections: ['intro-cs'] },
+                { id: 'hidden-1', title: 'Core Layer 1', sections: ['core-programming', 'core-math', 'cs-tools'] },
+                { id: 'hidden-2', title: 'Core Layer 2', sections: ['core-systems', 'core-theory', 'core-security', 'core-applications', 'core-ethics'] },
+                { id: 'hidden-3', title: 'Advanced Layer', sections: ['advanced-programming', 'advanced-systems', 'advanced-theory', 'advanced-security', 'advanced-math'] },
+                { id: 'output', title: 'Output Layer', sections: ['final-project'] }
+            ];
+        } else if (activeCurriculum === 'roadmap') {
+            currentData = roadmapShData;
+            layers = [
+                { id: 'layer-1', title: 'Foundations', sections: ['sh-sec-1'] },
+                { id: 'layer-2', title: 'Core Concepts', sections: ['sh-sec-2', 'sh-sec-3'] },
+                { id: 'layer-3', title: 'Tools & Practices', sections: ['sh-sec-4', 'sh-sec-5'] },
+                { id: 'layer-4', title: 'Data & Math', sections: ['sh-sec-6', 'sh-sec-7-discrete', 'sh-sec-7-continuous'] },
+                { id: 'layer-5', title: 'Advanced Theory', sections: ['sh-sec-8', 'sh-sec-9-arch'] }
+            ];
+        } else if (activeCurriculum === 'physics') {
+            currentData = physicsData;
+            layers = [
+                { id: 'layer-1', title: 'Classical', sections: ['phy-A'] },
+                { id: 'layer-2', title: 'Electromagnetism', sections: ['phy-B'] },
+                { id: 'layer-3', title: 'Thermo & Quantum', sections: ['phy-C', 'phy-D'] },
+                { id: 'layer-4', title: 'Advanced Theory', sections: ['phy-E', 'phy-F'] },
+                { id: 'layer-5', title: 'Particles & Matter', sections: ['phy-G', 'phy-H'] },
+                { id: 'layer-6', title: 'Specialized', sections: ['phy-I', 'phy-J', 'phy-K', 'phy-L', 'phy-M'] }
+            ];
+        }
 
         // Process each layer
         layers.forEach((layer, layerIndex) => {
             const layerX = startX + layerIndex * layerSpacing;
 
-            // Gather all courses for this layer
-            let layerCourses = [];
+            // Gather all courses/topics for this layer
+            let layerItems = [];
             layer.sections.forEach(sectionId => {
-                const section = ossuData.find(s => s.id === sectionId);
+                const section = currentData.find(s => s.id === sectionId);
                 if (section) {
-                    layerCourses.push(...section.courses.map(c => ({ ...c, sectionTitle: section.title })));
+                    // Handle different data structures (courses vs topics)
+                    const items = section.courses || section.topics || [];
+                    layerItems.push(...items.map(c => ({ ...c, sectionTitle: section.title })));
                 }
             });
 
             // Calculate vertical centering
-            const layerHeight = layerCourses.length * nodeSpacing;
-            const totalGraphHeight = 800; // Approximate
-            const startLayerY = startY + (totalGraphHeight - layerHeight) / 2;
+            const layerHeight = layerItems.length * nodeSpacing;
+            const totalGraphHeight = Math.max(800, layerHeight + 200);
+            const startLayerY = startY + (800 - layerHeight) / 2; // Center based on fixed height for stability
 
-            // Create nodes for courses
-            layerCourses.forEach((course, index) => {
+            // Create nodes
+            layerItems.forEach((item, index) => {
                 const nodeY = startLayerY + index * nodeSpacing;
 
-                const isUnlocked = checkPrerequisites(course.id, progress);
-                const isCompleted = progress[course.id]?.status === 'completed';
-                const prereq = getPrerequisite(course.id);
+                // Prerequisite check might need adjustment for non-OSSU if they don't use the same ID system
+                // For now, we assume checkPrerequisites handles it or returns true if no prereqs defined
+                const isUnlocked = checkPrerequisites(item.id, progress);
+                const isCompleted = progress[item.id]?.status === 'completed';
+
+                // Only look for prereqs if we have logic for it. 
+                // Currently getPrerequisite is likely hardcoded for OSSU. 
+                // We'll skip drawing specific prereq lines for others for now unless we update that util.
+                const prereq = activeCurriculum === 'ossu' ? getPrerequisite(item.id) : null;
 
                 nodes.push({
-                    id: course.id,
+                    id: item.id,
                     x: layerX,
                     y: nodeY,
-                    label: course.title,
-                    section: course.sectionTitle,
+                    label: item.title,
+                    section: item.sectionTitle,
                     type: 'neuron',
                     layer: layerIndex,
                     status: isCompleted ? 'completed' : (isUnlocked ? 'unlocked' : 'locked'),
@@ -75,17 +111,21 @@ export default function GraphView() {
 
                 // Create edges (Synapses)
                 if (prereq) {
-                    // Dependency edge
-                    edges.push({ source: prereq.id, target: course.id, type: 'synapse' });
+                    edges.push({ source: prereq.id, target: item.id, type: 'synapse' });
                 } else if (layerIndex > 0) {
-                    // If no direct prereq, connect to a representative node from previous layer (visual flow)
-                    // For simplicity, we only show direct dependencies to avoid clutter, 
-                    // OR we could connect to the "nearest" node in previous layer for the "neural net" look.
-                    // Let's stick to strict dependencies for now to keep it meaningful.
+                    // Visual flow connection: Connect to a node in the previous layer
+                    // To avoid clutter, we can connect to the "center" node of the previous layer
+                    // or just not draw these "implicit" edges.
+                    // Let's draw a faint line to the previous layer's center to show flow
+                    const prevLayerNodes = nodes.filter(n => n.layer === layerIndex - 1);
+                    if (prevLayerNodes.length > 0) {
+                        const sourceNode = prevLayerNodes[Math.floor(prevLayerNodes.length / 2)];
+                        edges.push({ source: sourceNode.id, target: item.id, type: 'flow' });
+                    }
                 }
             });
 
-            // Add Layer Label Node (Visual only)
+            // Add Layer Label Node
             nodes.push({
                 id: `layer-${layer.id}`,
                 x: layerX,
@@ -97,7 +137,7 @@ export default function GraphView() {
         });
 
         return { nodes, edges };
-    }, [progress]);
+    }, [progress, activeCurriculum]);
 
     // --- Interaction Handlers ---
     const handleWheel = (e) => {
@@ -125,29 +165,111 @@ export default function GraphView() {
         isDragging.current = false;
     };
 
+    // --- Keyboard Navigation ---
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            const PAN_STEP = 50;
+            const ZOOM_STEP = 0.2;
+
+            switch (e.key) {
+                case 'ArrowUp':
+                    setTransform(t => ({ ...t, y: t.y + PAN_STEP }));
+                    break;
+                case 'ArrowDown':
+                    setTransform(t => ({ ...t, y: t.y - PAN_STEP }));
+                    break;
+                case 'ArrowLeft':
+                    setTransform(t => ({ ...t, x: t.x + PAN_STEP }));
+                    break;
+                case 'ArrowRight':
+                    setTransform(t => ({ ...t, x: t.x - PAN_STEP }));
+                    break;
+                case '+':
+                case '=':
+                    setTransform(t => ({ ...t, scale: Math.min(t.scale + ZOOM_STEP, 3) }));
+                    break;
+                case '-':
+                    setTransform(t => ({ ...t, scale: Math.max(t.scale - ZOOM_STEP, 0.2) }));
+                    break;
+                case '0':
+                    setTransform({ x: -200, y: -100, scale: 0.6 });
+                    break;
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
     return (
         <div className="w-full h-screen flex flex-col items-center justify-center relative overflow-hidden bg-[var(--bg-void)]">
 
-            {/* Controls */}
-            <div className="absolute top-24 right-8 z-50 flex flex-col gap-2">
-                <button
-                    onClick={() => setTransform(t => ({ ...t, scale: t.scale + 0.2 }))}
-                    className="p-2 rounded-full bg-[var(--glass-surface)] border border-[var(--glass-border)] hover:bg-[var(--text-primary)]/10 text-[var(--text-primary)] transition-colors"
-                >
-                    <ZoomIn size={20} />
-                </button>
-                <button
-                    onClick={() => setTransform(t => ({ ...t, scale: t.scale - 0.2 }))}
-                    className="p-2 rounded-full bg-[var(--glass-surface)] border border-[var(--glass-border)] hover:bg-[var(--text-primary)]/10 text-[var(--text-primary)] transition-colors"
-                >
-                    <ZoomOut size={20} />
-                </button>
-                <button
-                    onClick={() => setTransform({ x: -200, y: -100, scale: 0.6 })} // Reset to a good overview
-                    className="p-2 rounded-full bg-[var(--glass-surface)] border border-[var(--glass-border)] hover:bg-[var(--text-primary)]/10 text-[var(--text-primary)] transition-colors"
-                >
-                    <Move size={20} />
-                </button>
+            {/* Unified Control Bar */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 bg-[var(--glass-surface)] backdrop-blur-xl border border-[var(--glass-border)] p-2 rounded-2xl shadow-2xl">
+
+                {/* Curriculum Switcher */}
+                <div className="flex bg-[var(--text-primary)]/5 p-1 rounded-xl">
+                    <button
+                        onClick={() => setActiveCurriculum('ossu')}
+                        title="OSSU Curriculum"
+                        className={`p-2 rounded-lg transition-all ${activeCurriculum === 'ossu'
+                            ? 'bg-[var(--text-primary)] text-[var(--bg-void)] shadow-lg'
+                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                            }`}
+                    >
+                        <Layers size={20} />
+                    </button>
+                    <button
+                        onClick={() => setActiveCurriculum('roadmap')}
+                        title="Roadmap.sh Curriculum"
+                        className={`p-2 rounded-lg transition-all ${activeCurriculum === 'roadmap'
+                            ? 'bg-[var(--text-primary)] text-[var(--bg-void)] shadow-lg'
+                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                            }`}
+                    >
+                        <Book size={20} />
+                    </button>
+                    <button
+                        onClick={() => setActiveCurriculum('physics')}
+                        title="Physics Curriculum"
+                        className={`p-2 rounded-lg transition-all ${activeCurriculum === 'physics'
+                            ? 'bg-[var(--text-primary)] text-[var(--bg-void)] shadow-lg'
+                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                            }`}
+                    >
+                        <Activity size={20} />
+                    </button>
+                </div>
+
+                <div className="w-px h-8 bg-[var(--text-primary)]/10" />
+
+                {/* Zoom Controls */}
+                <div className="flex items-center gap-1">
+                    <button
+                        onClick={() => setTransform(t => ({ ...t, scale: Math.max(t.scale - 0.2, 0.2) }))}
+                        className="p-2 rounded-lg hover:bg-[var(--text-primary)]/10 text-[var(--text-primary)] transition-colors"
+                        title="Zoom Out (-)"
+                    >
+                        <ZoomOut size={20} />
+                    </button>
+                    <span className="text-xs font-mono text-[var(--text-secondary)] w-12 text-center">
+                        {Math.round(transform.scale * 100)}%
+                    </span>
+                    <button
+                        onClick={() => setTransform(t => ({ ...t, scale: Math.min(t.scale + 0.2, 3) }))}
+                        className="p-2 rounded-lg hover:bg-[var(--text-primary)]/10 text-[var(--text-primary)] transition-colors"
+                        title="Zoom In (+)"
+                    >
+                        <ZoomIn size={20} />
+                    </button>
+                    <button
+                        onClick={() => setTransform({ x: -200, y: -100, scale: 0.6 })}
+                        className="p-2 rounded-lg hover:bg-[var(--text-primary)]/10 text-[var(--text-primary)] transition-colors ml-1"
+                        title="Reset View (0)"
+                    >
+                        <Move size={20} />
+                    </button>
+                </div>
             </div>
 
             {/* Graph Canvas */}
@@ -169,7 +291,7 @@ export default function GraphView() {
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
-                    <svg width="2000" height="1500" className="overflow-visible">
+                    <svg width="3000" height="2000" className="overflow-visible">
                         <defs>
                             <filter id="neuron-glow" x="-50%" y="-50%" width="200%" height="200%">
                                 <feGaussianBlur stdDeviation="4" result="coloredBlur" />
@@ -178,10 +300,6 @@ export default function GraphView() {
                                     <feMergeNode in="SourceGraphic" />
                                 </feMerge>
                             </filter>
-                            <linearGradient id="synapse-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="var(--text-primary)" stopOpacity="0.1" />
-                                <stop offset="100%" stopColor="var(--text-primary)" stopOpacity="0.3" />
-                            </linearGradient>
                         </defs>
 
                         {/* Edges (Synapses) */}
@@ -192,18 +310,19 @@ export default function GraphView() {
 
                             const isHovered = hoveredNode && (hoveredNode.id === source.id || hoveredNode.id === target.id);
                             const isDimmed = hoveredNode && !isHovered;
+                            const isFlow = edge.type === 'flow';
 
                             return (
                                 <motion.path
                                     key={`${edge.source}-${edge.target}`}
                                     d={`M ${source.x} ${source.y} C ${source.x + 100} ${source.y}, ${target.x - 100} ${target.y}, ${target.x} ${target.y}`}
                                     stroke={isHovered ? "var(--accent-glow)" : "var(--text-primary)"}
-                                    strokeWidth={isHovered ? 3 : 1}
-                                    strokeOpacity={isHovered ? 0.8 : (isDimmed ? 0.05 : 0.2)}
+                                    strokeWidth={isHovered ? 3 : (isFlow ? 0.5 : 1)}
+                                    strokeOpacity={isHovered ? 0.8 : (isDimmed ? 0.05 : (isFlow ? 0.1 : 0.2))}
                                     fill="none"
                                     initial={{ pathLength: 0, opacity: 0 }}
                                     animate={{ pathLength: 1, opacity: 1 }}
-                                    transition={{ duration: 1, delay: i * 0.01 }}
+                                    transition={{ duration: 1, delay: i * 0.005 }}
                                 />
                             );
                         })}
@@ -236,12 +355,12 @@ export default function GraphView() {
                                         scale: isHovered ? 1.2 : 1,
                                         opacity: isDimmed ? 0.1 : 1
                                     }}
-                                    transition={{ duration: 0.3, delay: node.layer * 0.1 + (i % 10) * 0.05 }}
+                                    transition={{ duration: 0.3, delay: node.layer * 0.1 + (i % 20) * 0.02 }}
                                     onMouseEnter={() => setHoveredNode(node)}
                                     onMouseLeave={() => setHoveredNode(null)}
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        navigate(`/study?id=${node.id}`);
+                                        navigate(`/course/${node.id}`);
                                     }}
                                     className="cursor-pointer"
                                 >
@@ -278,8 +397,8 @@ export default function GraphView() {
                                         x={node.x + 20}
                                         y={node.y + 4}
                                         className={`text-[10px] font-medium transition-colors ${isHovered ? "fill-[var(--text-primary)] font-bold text-xs" :
-                                                node.status === 'locked' ? "fill-[var(--text-secondary)] opacity-50" :
-                                                    "fill-[var(--text-secondary)]"
+                                            node.status === 'locked' ? "fill-[var(--text-secondary)] opacity-50" :
+                                                "fill-[var(--text-secondary)]"
                                             }`}
                                     >
                                         {node.label}
