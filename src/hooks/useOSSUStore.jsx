@@ -179,13 +179,17 @@ export function OSSUProvider({ children }) {
         }
     };
 
+    // Apply theme immediately when it changes
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
+
     // Save data to local storage AND Cloud (Debounced)
     useEffect(() => {
         if (!isInitialized) return;
 
         const timeoutId = setTimeout(() => {
             localStorage.setItem(STORAGE_KEY, JSON.stringify({ progress, notes, theme, streak, lastStudyDate, badges, schedule, weeklyHours }));
-            document.documentElement.setAttribute('data-theme', theme);
 
             // Auto-sync if logged in
             if (user) {

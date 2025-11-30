@@ -287,9 +287,9 @@ export default function CourseList() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="fixed top-6 right-6 z-50 flex items-center bg-[var(--glass-surface)] p-2 rounded-full border border-[var(--glass-border)] shadow-2xl backdrop-blur-xl border-blue-500/20"
+                        className="fixed top-20 left-4 right-4 md:top-6 md:left-auto md:right-6 md:w-auto z-50 flex items-center bg-[var(--glass-surface)] p-2 rounded-full border border-[var(--glass-border)] shadow-2xl backdrop-blur-xl border-blue-500/20"
                     >
-                        <div className="relative w-48">
+                        <div className="relative w-full md:w-48">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[var(--text-secondary)]" />
                             <input
                                 type="text"

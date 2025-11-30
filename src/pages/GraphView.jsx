@@ -6,17 +6,37 @@ import { physicsData } from '../data/physics-data';
 import { checkPrerequisites, getPrerequisite } from '../utils/prerequisites';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Check, Lock, Unlock, ZoomIn, ZoomOut, Move, BrainCircuit, Book, Activity, Layers } from 'lucide-react';
+import { Check, Lock, Unlock, ZoomIn, ZoomOut, Move, BrainCircuit, Book, Activity, Layers, Calendar, ChevronRight, ChevronLeft, X } from 'lucide-react';
 
 export default function GraphView() {
-    const { progress } = useOSSUStore();
+    const { progress, schedule, addToSchedule } = useOSSUStore();
     const navigate = useNavigate();
     const [activeCurriculum, setActiveCurriculum] = useState('ossu'); // 'ossu', 'roadmap', 'physics'
     const [hoveredNode, setHoveredNode] = useState(null);
     const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
     const containerRef = useRef(null);
     const isDragging = useRef(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const lastMousePos = useRef({ x: 0, y: 0 });
+
+    // --- Drag and Drop Handlers ---
+    const handleDragStart = (e, courseId) => {
+        e.dataTransfer.setData('courseId', courseId);
+        e.dataTransfer.effectAllowed = 'copy';
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+    };
+
+    const handleDrop = (e, day) => {
+        e.preventDefault();
+        const courseId = e.dataTransfer.getData('courseId');
+        if (courseId && !schedule[day].includes(courseId)) {
+            addToSchedule(day, courseId);
+        }
+    };
 
     // --- Neural Network Layout Calculation ---
     const { nodes, edges } = useMemo(() => {
@@ -363,6 +383,8 @@ export default function GraphView() {
                                         navigate(`/course/${node.id}`);
                                     }}
                                     className="cursor-pointer"
+                                    draggable="true"
+                                    onDragStart={(e) => handleDragStart(e, node.id)}
                                 >
                                     {/* Outer Glow */}
                                     <circle
@@ -461,6 +483,56 @@ export default function GraphView() {
                     </motion.div>
                 )}
             </AnimatePresence>
+            {/* Planner Sidebar */}
+            <motion.div
+                initial={{ x: '100%' }}
+                animate={{ x: isSidebarOpen ? 0 : '100%' }}
+                transition={{ type: 'spring', damping: 20 }}
+                className="absolute top-0 right-0 h-full w-80 bg-[var(--glass-surface)] backdrop-blur-xl border-l border-[var(--glass-border)] z-40 flex flex-col shadow-2xl"
+            >
+                <div className="p-4 border-b border-[var(--glass-border)] flex justify-between items-center">
+                    <h2 className="font-bold text-[var(--text-primary)] flex items-center gap-2">
+                        <Calendar size={18} /> Quick Planner
+                    </h2>
+                    <button onClick={() => setIsSidebarOpen(false)} className="p-1 hover:bg-[var(--text-primary)]/10 rounded-lg text-[var(--text-secondary)]">
+                        <X size={18} />
+                    </button>
+                </div>
+
+                <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                    {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => (
+                        <div
+                            key={day}
+                            onDragOver={handleDragOver}
+                            onDrop={(e) => handleDrop(e, day)}
+                            className="p-3 rounded-xl bg-[var(--bg-void)] border border-[var(--glass-border)] min-h-[80px] transition-colors hover:border-blue-500/30"
+                        >
+                            <h3 className="text-xs font-bold text-[var(--text-secondary)] mb-2 uppercase tracking-wider">{day}</h3>
+                            <div className="space-y-1">
+                                {schedule[day]?.map((courseId, idx) => (
+                                    <div key={`${day}-${courseId}-${idx}`} className="text-xs text-[var(--text-primary)] bg-[var(--glass-surface)] p-1.5 rounded border border-[var(--glass-border)] truncate">
+                                        {nodes.find(n => n.id === courseId)?.label || courseId}
+                                    </div>
+                                ))}
+                                {(!schedule[day] || schedule[day].length === 0) && (
+                                    <div className="text-[10px] text-[var(--text-secondary)]/30 italic text-center py-2">Drop here</div>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </motion.div>
+
+            {/* Sidebar Toggle */}
+            {!isSidebarOpen && (
+                <button
+                    onClick={() => setIsSidebarOpen(true)}
+                    className="absolute top-8 right-8 z-40 p-3 rounded-xl bg-[var(--glass-surface)] border border-[var(--glass-border)] text-[var(--text-primary)] shadow-lg hover:scale-105 transition-all"
+                >
+                    <ChevronLeft size={20} />
+                </button>
+            )}
+
         </div>
     );
 }
