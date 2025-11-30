@@ -23,7 +23,7 @@ export default function Terms() {
                     <section className="p-6 bg-[var(--glass-surface)] rounded-2xl border border-[var(--glass-border)]">
                         <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4">1. Introduction</h2>
                         <p>
-                            Welcome to OSSU Tracker. By using this website, you agree to comply with and be bound by the following terms and conditions of use.
+                            Welcome to Course Tracker. By using this website, you agree to comply with and be bound by the following terms and conditions of use.
                         </p>
                     </section>
 

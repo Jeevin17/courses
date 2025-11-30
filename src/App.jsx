@@ -20,6 +20,8 @@ const CourseList = lazy(loadCourseList);
 const CourseDetail = lazy(loadCourseDetail);
 const StudyMode = lazy(loadStudyMode);
 const GraphView = lazy(loadGraphView);
+const Planner = lazy(() => import('./pages/Planner'));
+const Settings = lazy(() => import('./pages/Settings'));
 const Terms = lazy(loadTerms);
 const Credits = lazy(loadCredits);
 
@@ -68,8 +70,10 @@ function App() {
                                 <Route path="/courses" element={<CourseList />} />
                                 <Route path="/courses/:curriculumId" element={<CourseList />} />
                                 <Route path="/course/:courseId" element={<CourseDetail />} />
+                                <Route path="/planner" element={<Planner />} />
                                 <Route path="/study" element={<StudyMode />} />
                                 <Route path="/graph" element={<GraphView />} />
+                                <Route path="/settings" element={<Settings />} />
                                 <Route path="/terms" element={<Terms />} />
                                 <Route path="/credits" element={<Credits />} />
                             </Routes>

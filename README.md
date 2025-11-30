@@ -1,12 +1,3 @@
-# 🎓 OSSU Course Tracker
-
-A comprehensive, interactive course tracker and study companion designed for the Open Source Society University (OSSU) curriculum. Visualize your learning path, track your progress, and stay focused with built-in study tools.
-
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![React](https://img.shields.io/badge/React-18-blue)
-![Vite](https://img.shields.io/badge/Vite-4.0-purple)
-![Tailwind](https://img.shields.io/badge/Tailwind-3.0-cyan)
-
 ## ✨ Features
 
 ### 🧠 Interactive Neural Network Graph
@@ -85,4 +76,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-*Built with ❤️ for the love of learning.*
+*Built with ❤️ for the love of learning.(created with help of google antigravity)*

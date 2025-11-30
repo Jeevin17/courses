@@ -19,9 +19,9 @@ export default defineConfig({
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
         manifest: {
-          name: 'OSSU Tracker',
-          short_name: 'OSSU',
-          description: 'Track your progress through the OSSU Computer Science curriculum',
+          name: 'Course Tracker',
+          short_name: 'Tracker',
+          description: 'Track your progress through various computer science and physics curricula',
           theme_color: '#0a0a0a',
           background_color: '#0a0a0a',
           display: 'standalone',
@@ -42,4 +42,9 @@ export default defineConfig({
       apply: 'build'
     }
   ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.js',
+  },
 })

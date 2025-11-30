@@ -1,5 +1,5 @@
 {
-    "name": "ossu-tracker",
+    "name": "course-tracker",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -7,9 +7,11 @@
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint .",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "test": "vitest"
     },
     "dependencies": {
+        "@vercel/analytics": "^1.5.0",
         "clsx": "^2.0.0",
         "framer-motion": "^10.18.0",
         "lucide-react": "^0.300.0",
@@ -22,16 +24,21 @@
         "vite-plugin-pwa": "^1.2.0"
     },
     "devDependencies": {
+        "@testing-library/jest-dom": "^6.1.5",
+        "@testing-library/react": "^14.1.2",
         "@types/react": "^18.2.43",
         "@types/react-dom": "^18.2.17",
         "@vitejs/plugin-react": "^4.2.1",
         "autoprefixer": "^10.4.22",
         "eslint": "^8.55.0",
+        "eslint-plugin-jsx-a11y": "^6.8.0",
         "eslint-plugin-react": "^7.33.2",
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-react-refresh": "^0.4.5",
+        "jsdom": "^23.0.1",
         "postcss": "^8.5.6",
         "tailwindcss": "^3.4.1",
-        "vite": "^5.0.8"
+        "vite": "^5.0.8",
+        "vitest": "^1.0.4"
     }
 }

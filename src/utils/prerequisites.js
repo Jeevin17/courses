@@ -64,7 +64,8 @@ export const getPrerequisite = (courseId) => {
  */
 export const checkPrerequisites = (courseId, progress) => {
     // Find the section this course belongs to
-    const section = ossuData.find(s => s.courses.some(c => c.id === courseId));
+    // Find the section this course belongs to
+    const section = ossuData.find(s => (s.courses || []).some(c => c.id === courseId));
     if (!section) return true;
 
     const courseIndex = section.courses.findIndex(c => c.id === courseId);

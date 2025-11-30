@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useOSSUStore } from '../hooks/useOSSUStore';
 import { ossuData } from '../data/ossu-data';
+import { exportData, importData } from '../utils/dataPersistence';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, CheckCircle, Activity, ArrowRight, Sparkles, Play, Settings, Clock, Calendar, Atom, Book } from 'lucide-react';
+import { BookOpen, CheckCircle, Activity, ArrowRight, Sparkles, Play, Settings, Clock, Calendar, Atom, Book, Download, Upload, FileJson, Flame, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { roadmapShData } from '../data/roadmap-sh-data';
 import { physicsData } from '../data/physics-data';
 
 export default function Dashboard() {
-    const { progress, theme, toggleTheme } = useOSSUStore();
-    const [showSettings, setShowSettings] = useState(false);
-    const [weeklyHours, setWeeklyHours] = useState(15);
+    const { progress, theme, toggleTheme, importState, streak, badges, weeklyHours } = useOSSUStore();
     const [activeCurriculum, setActiveCurriculum] = useState('ossu'); // 'ossu', 'roadmap-sh', 'physics'
 
     // --- Data Calculation ---
@@ -56,13 +55,7 @@ export default function Dashboard() {
             {/* Central Portal */}
             <div className="glass-portal rounded-[40px] overflow-hidden flex flex-col items-center text-center p-8 md:p-12 transition-all duration-700 group-hover:border-[var(--text-primary)]/20 group-hover:shadow-[0_0_100px_-20px_var(--accent-glow)] relative">
 
-                {/* Settings Button */}
-                <button
-                    onClick={() => setShowSettings(true)}
-                    className="absolute top-6 right-6 p-2 rounded-full bg-[var(--text-primary)]/5 hover:bg-[var(--text-primary)]/10 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors z-30"
-                >
-                    <Settings size={20} />
-                </button>
+
 
                 {/* Hero Section */}
                 <div className="relative z-20 space-y-6 mb-12">
@@ -164,6 +157,40 @@ export default function Dashboard() {
                     </div>
                 </div>
 
+                {/* Gamification Stats */}
+                <div className="flex items-center justify-center gap-4 mb-8">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-bold">
+                        <Flame size={18} fill="currentColor" />
+                        <span>{streak} Day Streak</span>
+                    </div>
+                </div>
+
+                {/* Badges Section */}
+                {badges.length > 0 && (
+                    <div className="mb-8 p-4 bg-[var(--glass-surface)] border border-[var(--glass-border)] rounded-2xl inline-block">
+                        <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-3 flex items-center justify-center gap-2">
+                            <Award size={14} /> Achievements
+                        </h3>
+                        <div className="flex justify-center gap-3">
+                            {badges.includes('first-step') && (
+                                <div className="group relative p-2 bg-blue-500/10 rounded-xl border border-blue-500/20" title="First Step: Complete 1 Course">
+                                    <BookOpen size={20} className="text-blue-400" />
+                                </div>
+                            )}
+                            {badges.includes('on-fire') && (
+                                <div className="group relative p-2 bg-orange-500/10 rounded-xl border border-orange-500/20" title="On Fire: 3 Day Streak">
+                                    <Flame size={20} className="text-orange-400" />
+                                </div>
+                            )}
+                            {badges.includes('unstoppable') && (
+                                <div className="group relative p-2 bg-purple-500/10 rounded-xl border border-purple-500/20" title="Unstoppable: 7 Day Streak">
+                                    <Sparkles size={20} className="text-purple-400" />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
                 {/* Projection Graph */}
                 <div className="w-full h-64 relative z-20 mb-8">
                     <h3 className="text-sm font-medium text-[var(--text-secondary)] mb-4 flex items-center justify-center gap-2">
@@ -209,60 +236,7 @@ export default function Dashboard() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-b from-blue-500/10 via-transparent to-transparent blur-3xl pointer-events-none" />
             </div>
 
-            {/* Settings Modal */}
-            <AnimatePresence>
-                {showSettings && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-                        onClick={() => setShowSettings(false)}
-                    >
-                        <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            className="bg-[var(--bg-void)] border border-[var(--glass-border)] rounded-3xl p-8 max-w-sm w-full shadow-2xl"
-                            onClick={e => e.stopPropagation()}
-                        >
-                            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-6">Settings</h3>
 
-                            <div className="space-y-6">
-                                <div>
-                                    <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Target Weekly Hours</label>
-                                    <div className="flex items-center gap-4">
-                                        <input
-                                            type="range"
-                                            min="1"
-                                            max="40"
-                                            value={weeklyHours}
-                                            onChange={(e) => setWeeklyHours(parseInt(e.target.value))}
-                                            className="flex-1 h-2 bg-[var(--text-primary)]/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                                        />
-                                        <span className="text-[var(--text-primary)] font-mono w-12 text-right">{weeklyHours}h</span>
-                                    </div>
-                                    <p className="text-xs text-[var(--text-secondary)]/50 mt-2">Used to calculate estimated completion date.</p>
-                                </div>
-
-                                <div className="pt-4 border-t border-[var(--glass-border)]">
-                                    <div className="flex items-center justify-between text-sm">
-                                        <span className="text-[var(--text-secondary)]">Estimated Completion</span>
-                                        <span className="text-blue-400 font-medium">{completionDate.toLocaleDateString()}</span>
-                                    </div>
-                                </div>
-
-                                <button
-                                    onClick={() => setShowSettings(false)}
-                                    className="w-full py-3 rounded-xl bg-[var(--text-primary)] text-[var(--bg-void)] font-bold hover:opacity-90 transition-opacity"
-                                >
-                                    Done
-                                </button>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </motion.div >
     );
 }

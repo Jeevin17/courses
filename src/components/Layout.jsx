@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, GraduationCap, Command, Sun, Moon, Network } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, LibraryBig, Sun, Moon, Network, Calendar, Settings as SettingsIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useOSSUStore } from '../hooks/useOSSUStore';
 
@@ -10,8 +10,10 @@ export default function Layout({ children }) {
     const navItems = [
         { path: '/', label: 'Overview', icon: LayoutDashboard },
         { path: '/courses/ossu', label: 'Curriculum', icon: BookOpen },
+        { path: '/planner', label: 'Planner', icon: Calendar },
         { path: '/graph', label: 'Network', icon: Network },
         { path: '/study', label: 'Focus', icon: GraduationCap },
+        { path: '/settings', label: 'Settings', icon: SettingsIcon },
     ];
 
     return (
@@ -33,7 +35,7 @@ export default function Layout({ children }) {
                 >
                     {/* Logo Icon */}
                     <Link to="/" className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-violet-600 flex items-center justify-center shadow-lg shadow-blue-500/20 mr-2 hover:scale-105 transition-transform">
-                        <Command size={18} className="text-white" />
+                        <LibraryBig size={20} className="text-white" />
                     </Link>
 
                     {/* Nav Items */}
