@@ -31,10 +31,52 @@ const GridItem = forwardRef(({ children, ...props }, ref) => (
     </div>
 ));
 
+// Circular Progress Component
+const CircularProgress = ({ percentage, size = 24, strokeWidth = 3, status }) => {
+    const radius = (size - strokeWidth) / 2;
+    const circumference = radius * 2 * Math.PI;
+    const offset = circumference - (percentage / 100) * circumference;
+
+    // Force 100% visual if completed
+    const visualOffset = status === 'completed' ? 0 : offset;
+    const colorClass = status === 'completed' ? 'text-green-500' : 'text-blue-500';
+
+    return (
+        <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+            <svg className="transform -rotate-90 w-full h-full">
+                <circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={radius}
+                    stroke="currentColor"
+                    strokeWidth={strokeWidth}
+                    fill="transparent"
+                    className="text-[var(--text-primary)]/10"
+                />
+                <circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={radius}
+                    stroke="currentColor"
+                    strokeWidth={strokeWidth}
+                    fill="transparent"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={visualOffset}
+                    strokeLinecap="round"
+                    className={`${colorClass} transition-all duration-500 ease-out`}
+                />
+            </svg>
+            {status === 'completed' && (
+                <CheckCircle size={size * 0.5} className={`absolute ${colorClass}`} />
+            )}
+        </div>
+    );
+};
+
 export default function CourseList() {
     const navigate = useNavigate();
     const { curriculumId } = useParams();
-    const { progress } = useOSSUStore();
+    const { progress, getCourseProgress } = useOSSUStore();
     const [searchTerm, setSearchTerm] = useState('');
     const [activeFilter, setActiveFilter] = useState('all');
     const [isScrolled, setIsScrolled] = useState(false);
@@ -76,15 +118,15 @@ export default function CourseList() {
     const renderCourseCard = (index) => {
         const course = flatCourses[index];
         const isUnlocked = checkPrerequisites(course.id, progress);
-        const status = progress[course.id]?.status;
+        const { status, progressPercent } = getCourseProgress(course.id);
 
         return (
             <div className="pb-6"> {/* Spacing wrapper */}
                 <Link
                     to={`/course/${course.id}`}
                     className={`group relative p-6 rounded-3xl border transition-all duration-300 flex flex-col justify-between min-h-[220px] h-full hover:-translate-y-1 hover:shadow-xl ${!isUnlocked
-                            ? 'bg-[var(--glass-surface)]/30 border-red-500/10 hover:border-red-500/30'
-                            : 'bg-[var(--glass-surface)] border-[var(--glass-border)] hover:border-blue-500/30'
+                        ? 'bg-[var(--glass-surface)]/30 border-red-500/10 hover:border-red-500/30'
+                        : 'bg-[var(--glass-surface)] border-[var(--glass-border)] hover:border-blue-500/30'
                         }`}
                 >
                     <div>
@@ -92,12 +134,12 @@ export default function CourseList() {
                             <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-secondary)] bg-[var(--text-primary)]/5 px-2 py-1 rounded-md">
                                 {course.provider || 'External'}
                             </span>
-                            {status === 'completed' ? (
-                                <CheckCircle className="h-5 w-5 text-green-500" />
-                            ) : !isUnlocked ? (
-                                <Lock className="h-4 w-4 text-red-400" />
+
+                            {/* Circular Progress Indicator */}
+                            {!isUnlocked ? (
+                                <Lock className="h-5 w-5 text-red-400" />
                             ) : (
-                                <div className="h-2 w-2 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <CircularProgress percentage={progressPercent} status={status} size={28} />
                             )}
                         </div>
 
@@ -158,8 +200,8 @@ export default function CourseList() {
                                     <button
                                         onClick={() => navigate('/courses/ossu')}
                                         className={`px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${domain === 'cs'
-                                                ? 'bg-[var(--text-primary)] text-[var(--bg-void)] shadow-lg'
-                                                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                                            ? 'bg-[var(--text-primary)] text-[var(--bg-void)] shadow-lg'
+                                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                                             }`}
                                     >
                                         <Book size={16} /> Computer Science
@@ -167,8 +209,8 @@ export default function CourseList() {
                                     <button
                                         onClick={() => navigate('/courses/physics')}
                                         className={`px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${domain === 'physics'
-                                                ? 'bg-[var(--text-primary)] text-[var(--bg-void)] shadow-lg'
-                                                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                                            ? 'bg-[var(--text-primary)] text-[var(--bg-void)] shadow-lg'
+                                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                                             }`}
                                     >
                                         <Activity size={16} /> Physics
@@ -182,8 +224,8 @@ export default function CourseList() {
                                     <button
                                         onClick={() => navigate('/courses/ossu')}
                                         className={`px-4 py-2 text-sm font-medium border-b-2 transition-all ${track === 'ossu'
-                                                ? 'border-blue-500 text-blue-400'
-                                                : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                                            ? 'border-blue-500 text-blue-400'
+                                            : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                                             }`}
                                     >
                                         OSSU Curriculum
@@ -191,8 +233,8 @@ export default function CourseList() {
                                     <button
                                         onClick={() => navigate('/courses/roadmap-sh')}
                                         className={`px-4 py-2 text-sm font-medium border-b-2 transition-all ${track === 'roadmap'
-                                                ? 'border-blue-500 text-blue-400'
-                                                : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                                            ? 'border-blue-500 text-blue-400'
+                                            : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                                             }`}
                                     >
                                         Roadmap.sh
@@ -206,7 +248,9 @@ export default function CourseList() {
                 {/* Search & Filters */}
                 <motion.div
                     layout
-                    className={`flex gap-4 items-center bg-[var(--glass-surface)] p-4 rounded-2xl border border-[var(--glass-border)] transition-all ${isScrolled ? 'flex-row justify-end shadow-lg' : 'flex-col sm:flex-row justify-between'
+                    className={`flex gap-4 items-center bg-[var(--glass-surface)] p-4 rounded-2xl border border-[var(--glass-border)] transition-all ${isScrolled
+                        ? 'fixed top-24 right-6 z-40 shadow-2xl backdrop-blur-xl w-auto'
+                        : 'relative flex-col sm:flex-row justify-between w-full'
                         }`}
                 >
                     <motion.div layout className={`relative ${isScrolled ? 'w-64' : 'w-full sm:w-96'}`}>
@@ -225,8 +269,8 @@ export default function CourseList() {
                                 key={filter}
                                 onClick={() => setActiveFilter(filter)}
                                 className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${activeFilter === filter
-                                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-                                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--text-primary)]/5'
+                                    ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--text-primary)]/5'
                                     }`}
                             >
                                 {filter.replace('-', ' ')}
