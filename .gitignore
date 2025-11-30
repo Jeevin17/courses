@@ -1,0 +1,7 @@
+/src_backup
+node_modules
+dist
+.env
+DEPLOYMENT.md
+.DS_Store
+coverage

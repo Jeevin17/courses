@@ -1,0 +1,1057 @@
+{
+  "Computer Science": {
+    "name": "Harvard University's CS50: Introduction to Computer Science",
+    "url": "https://www.edx.org/course/introduction-computer-science-harvardx-cs50x",
+    "description": "An introductory course on computer science from Harvard."
+  },
+  "Programming Fundamentals": {
+    "name": "CS50's Introduction to Programming with Python",
+    "url": "https://www.edx.org/course/cs50s-introduction-to-programming-with-python",
+    "description": "An introduction to programming using Python, a popular language for web development, data science, and artificial intelligence."
+  },
+  "Basic Syntax and Semantics": {
+    "name": "Basic Syntax and Semantics (Scribd PDF)",
+    "url": "https://www.scribd.com/document/443430913/BASIC-SYNTAX-AND-SEMANTICS-pdf",
+    "description": "An introductory PDF document on basic syntax and semantics."
+  },
+  "Functions and Procedures": {
+    "name": "LearnPython.org Functions Tutorial",
+    "url": "https://www.learnpython.org/en/Functions",
+    "description": "A tutorial on functions in Python."
+  },
+  "Data Types and Variables": {
+    "name": "freeCodeCamp - Variable Data Types Explained",
+    "url": "https://www.freecodecamp.org/news/variable-data-types-explained/",
+    "description": "An article explaining variable data types."
+  },
+  "Input/Output Operations": {
+    "name": "Fundamentals of Programming - Input and Output Operations (YouTube)",
+    "url": "https://www.youtube.com/watch?v=c_P2_m_pG6A",
+    "description": "A YouTube video on input and output operations in programming."
+  },
+  "Control Flow (Conditional Statements, Loops)": {
+    "name": "Codecademy - Learn Python 3",
+    "url": "https://www.codecademy.com/learn/learn-python-3",
+    "description": "A course on Python 3, covering control flow."
+  },
+  "Error Handling": {
+    "name": "Python Error Handling | Python Tutorial for Beginners #20",
+    "url": "https://www.youtube.com/watch?v=6dFw35E3hM4",
+    "description": "A YouTube video on error handling in Python."
+  },
+  "Introduction to Programming": {
+    "name": "freeCodeCamp - Introduction to Programming and Computer Science - Full Course",
+    "url": "https://www.youtube.com/watch?v=zOjov-2OZ0E",
+    "description": "A full course on introduction to programming and computer science."
+  },
+  "Classes and Objects": {
+    "name": "LearnPython.org - Classes and Objects",
+    "url": "https://www.learnpython.org/en/Classes_and_Objects",
+    "description": "A tutorial on classes and objects in Python."
+  },
+  "Design Patterns": {
+    "name": "Design Patterns in Object Oriented Programming",
+    "url": "https://www.youtube.com/watch?v=t_jg-N65_2E",
+    "description": "A YouTube video on design patterns in object-oriented programming."
+  },
+  "Inheritance and Polymorphism": {
+    "name": "Codecademy - Learn Java: Inheritance and Polymorphism",
+    "url": "https://www.codecademy.com/learn/learn-java-inheritance-and-polymorphism",
+    "description": "A course on inheritance and polymorphism in Java."
+  },
+  "Object-Oriented Design Principles (SOLID)": {
+    "name": "SOLID Principles: Do you really understand them?",
+    "url": "https://www.youtube.com/watch?v=9_a-2VnS-tU",
+    "description": "A YouTube video on SOLID design principles."
+  },
+  "Encapsulation and Abstraction": {
+    "name": "NPTEL - Fundamentals of Object Oriented Programming (Swayam)",
+    "url": "https://onlinecourses.nptel.ac.in/noc20_cs70/preview",
+    "description": "A course on the fundamentals of object-oriented programming."
+  },
+  "UML Diagrams": {
+    "name": "freeCodeCamp - UML Diagrams Full Course (YouTube)",
+    "url": "https://www.youtube.com/watch?v=Wn_gH-a3f14",
+    "description": "A full course on UML diagrams on YouTube."
+  },
+  "Object-Oriented Programming": {
+    "name": "Great Learning - Basics of Object-Oriented Programming",
+    "url": "https://www.mygreatlearning.com/academy/learn-for-free/courses/object-oriented-programming",
+    "description": "A course on the basics of object-oriented programming."
+  },
+  "Arrays and Linked Lists": {
+    "name": "Simplilearn - Free DSA Course Online with Certificate",
+    "url": "https://www.simplilearn.com/free-dsa-course-skillup",
+    "description": "A free course on data structures and algorithms with a certificate."
+  },
+  "Sorting Algorithms (e.g., Merge Sort, Quick Sort)": {
+    "name": "CS50 - Merge Sort",
+    "url": "https://www.youtube.com/watch?v=Ns7tGNb-7vM",
+    "description": "A YouTube video from CS50 on the Merge Sort algorithm."
+  },
+  "Stacks and Queues": {
+    "name": "Great Learning Academy - Stacks and Queues",
+    "url": "https://www.mygreatlearning.com/academy/learn-for-free/courses/stacks-and-queues",
+    "description": "A course on stacks and queues."
+  },
+  "Searching Algorithms (e.g., Binary Search)": {
+    "name": "CS50 - Binary Search",
+    "url": "https://www.youtube.com/watch?v=5xlIPT1ADcA",
+    "description": "A YouTube video from CS50 on the Binary Search algorithm."
+  },
+  "Trees and Graphs": {
+    "name": "freeCodeCamp - Graph Theory Course",
+    "url": "https://www.youtube.com/watch?v=2-A-C6HOfI0",
+    "description": "A YouTube course on graph theory."
+  },
+  "Algorithm Analysis (Big O Notation)": {
+    "name": "freeCodeCamp - Big O Notation - Full Course (YouTube)",
+    "url": "https://www.youtube.com/watch?v=Mo4vesaut8g",
+    "description": "A full course on Big O notation on YouTube."
+  },
+  "Data Structures and Algorithms": {
+    "name": "freeCodeCamp - Data Structures and Algorithms",
+    "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
+    "description": "A learning path on data structures and algorithms with JavaScript."
+  },
+  "Standard Libraries": {
+    "name": "learncpp.com - C++ Standard Library",
+    "url": "https://www.learncpp.com/cpp-tutorial/the-standard-library/",
+    "description": "A tutorial on the C++ standard library."
+  },
+  "Memory Management": {
+    "name": "CS50 - Memory",
+    "url": "https://www.youtube.com/watch?v=F6I86gM5d2c",
+    "description": "A YouTube video from CS50 on memory management."
+  },
+  "Frameworks and Tools": {
+    "name": "freeCodeCamp - Full Stack Web Development",
+    "url": "https://www.freecodecamp.org/learn/",
+    "description": "A learning path on full-stack web development."
+  },
+  "Concurrency and Parallelism": {
+    "name": "CS50 - Concurrency",
+    "url": "https://www.youtube.com/watch?v=L24J_V7n2cs",
+    "description": "A YouTube video from CS50 on concurrency."
+  },
+  "Language-Specific Paradigms": {
+    "name": "edX - Paradigms of Computer Programming – Fundamentals (Université catholique de Louvain)",
+    "url": "https://www.edx.org/course/paradigms-of-computer-programming-fundamentals",
+    "description": "A course on the fundamentals of computer programming paradigms."
+  },
+  "Programming Languages": {
+    "name": "Codecademy - Code Foundations",
+    "url": "https://www.codecademy.com/learn/paths/code-foundations",
+    "description": "A learning path on the foundations of code."
+  },
+  "Requirements Analysis": {
+    "name": "Requirements Elicitation and Analysis Course - UCLA Extension",
+    "url": "https://www.uclaextension.edu/requirements-elicitation-and-analysis-course",
+    "description": "A course on requirements elicitation and analysis."
+  },
+  "Version Control (Git)": {
+    "name": "freeCodeCamp - Git and GitHub for Beginners - Crash Course",
+    "url": "https://www.youtube.com/watch?v=RGOj5yH7evk",
+    "description": "A crash course on Git and GitHub for beginners."
+  },
+  "Software Design": {
+    "name": "edX - Software Design: Principles, Models, and Patterns (Harvard University)",
+    "url": "https://www.edx.org/course/software-design-principles-models-and-patterns",
+    "description": "A course on software design principles, models, and patterns."
+  },
+  "Code Review": {
+    "name": "Google TechTalks - The Art of Code Review",
+    "url": "https://www.youtube.com/watch?v=s_y-h-6a-Bw",
+    "description": "A Google TechTalk on the art of code review."
+  },
+  "Testing and Debugging": {
+    "name": "freeCodeCamp - Software Testing and - Course for Beginners",
+    "url": "https://www.youtube.com/watch?v=3eQh3G1d23I",
+    "description": "A course for beginners on software testing and."
+  },
+  "Software Development Life Cycle (SDLC)": {
+    "name": "freeCodeCamp - What Is the Software Development Life Cycle?",
+    "url": "https://www.freecodecamp.org/news/what-is-the-software-development-life-cycle/",
+    "description": "An article explaining the software development life cycle."
+  },
+  "Software Engineering Principles": {
+    "name": "edX - Introduction to Software Engineering (The Linux Foundation)",
+    "url": "https://www.edx.org/course/introduction-to-software-engineering",
+    "description": "An introductory course on software engineering."
+  },
+  "Theoretical Foundations": {
+    "name": "edX - Intro to Theoretical Computer Science (Harvard University)",
+    "url": "https://www.edx.org/course/cs50s-introduction-to-theoretical-computer-science",
+    "description": "An introductory course on theoretical computer science from Harvard."
+  },
+  "Relational Database Concepts": {
+    "name": "edX - Introduction to Relational Databases (RDBMS) (IBM)",
+    "url": "https://www.edx.org/course/introduction-to-relational-databases-rdbms",
+    "description": "An introductory course on relational databases from IBM."
+  },
+  "NoSQL Databases": {
+    "name": "Great Learning Academy - NoSQL Databases",
+    "url": "https://www.mygreatlearning.com/academy/learn-for-free/courses/nosql-databases",
+    "description": "A course on NoSQL databases."
+  },
+  "SQL (Structured Query Language)": {
+    "name": "Khan Academy - Intro to SQL: Querying and managing data",
+    "url": "https://www.khanacademy.org/computing/computer-programming/sql",
+    "description": "An introductory course on SQL."
+  },
+  "Database Transactions": {
+    "name": "edX - Databases: Indexes and Transactions (Stanford University)",
+    "url": "https://www.edx.org/course/databases-indexes-and-transactions",
+    "description": "A course on database indexes and transactions from Stanford."
+  },
+  "Database Design and Normalization": {
+    "name": "freeCodeCamp - Database Design Course",
+    "url": "https://www.freecodecamp.org/news/database-design-course/",
+    "description": "A course on database design."
+  },
+  "Data Modeling": {
+    "name": "freeCodeCamp - What is Data Modeling?",
+    "url": "https://www.freecodecamp.org/news/what-is-data-modeling/",
+    "description": "An article explaining data modeling."
+  },
+  "Database Management": {
+    "name": "Great Learning Academy - Database Management System",
+    "url": "https://www.mygreatlearning.com/academy/learn-for-free/courses/database-management-system",
+    "description": "A course on database management systems."
+  },
+  "Set Theory": {
+    "name": "Khan Academy - Set Theory",
+    "url": "https://www.khanacademy.org/math/logic/proofs-by-induction/sets-and-set-operations/v/sets-and-set-operations-an-introduction",
+    "description": "An introduction to set theory."
+  },
+  "Graph Theory": {
+    "name": "freeCodeCamp - Graph Theory Course",
+    "url": "https://www.youtube.com/watch?v=2-A-C6HOfI0",
+    "description": "A YouTube course on graph theory."
+  },
+  "Logic and Proofs": {
+    "name": "Open Learning Initiative - Logic & Proofs",
+    "url": "https://oli.cmu.edu/courses/logic-proofs-open-free/",
+    "description": "An open and free course on logic and proofs."
+  },
+  "Number Theory": {
+    "name": "The Open University - Introduction to Number Theory",
+    "url": "https://www.open.edu/openlearn/science-maths-technology/introduction-number-theory/content-section-overview",
+    "description": "An introductory course on number theory."
+  },
+  "Combinatorics and Probability": {
+    "name": "Khan Academy - Combinatorics and Probability",
+    "url": "https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb",
+    "description": "A course on combinatorics and probability."
+  },
+  "Algebraic Structures": {
+    "name": "Saylor Academy - Abstract Algebra",
+    "url": "https://learn.saylor.org/course/math211",
+    "description": "A course on abstract algebra."
+  },
+  "Vectors and Matrices": {
+    "name": "Khan Academy - Linear Algebra",
+    "url": "https://www.khanacademy.org/math/linear-algebra",
+    "description": "A course on linear algebra."
+  },
+  "Vector Spaces": {
+    "name": "MIT OpenCourseWare - Linear Algebra (Prof. Gilbert Strang)",
+    "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+    "description": "A course on linear algebra from MIT."
+  },
+  "Linear Transformations": {
+    "name": "edX - Linear Algebra - Foundations to Frontiers (UTAustinX)",
+    "url": "https://www.edx.org/course/linear-algebra-foundations-to-frontiers",
+    "description": "A course on linear algebra from foundations to frontiers."
+  },
+  "Systems of Linear Equations": {
+    "name": "edX - Linear Algebra I: Linear Equations (Georgia Institute of Technology)",
+    "url": "https://www.edx.org/course/linear-algebra-i-linear-equations",
+    "description": "A course on linear equations in linear algebra."
+  },
+  "Eigenvalues and Eigenvectors": {
+    "name": "3Blue1Brown - Eigenvectors and eigenvalues",
+    "url": "https://www.youtube.com/watch?v=PFDu9oVAE-g",
+    "description": "A YouTube video explaining eigenvalues and eigenvectors."
+  },
+  "Matrix Decompositions": {
+    "name": "edX - Matrix Methods in Data Analysis, Signal Processing, and Machine Learning (MIT)",
+    "url": "https://www.edx.org/course/matrix-methods-in-data-analysis-signal-processing-and-machine-learning",
+    "description": "A course on matrix methods that covers matrix decompositions."
+  },
+  "Linear Algebra": {
+    "name": "MIT OpenCourseWare - Linear Algebra (Prof. Gilbert Strang)",
+    "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+    "description": "A course on linear algebra from MIT."
+  },
+  "Limits and Derivatives": {
+    "name": "Khan Academy - Calculus 1",
+    "url": "https://www.khanacademy.org/math/calculus-1",
+    "description": "A course on calculus 1."
+  },
+  "Differential Equations": {
+    "name": "MIT OpenCourseWare - Differential Equations",
+    "url": "https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/",
+    "description": "A course on differential equations from MIT."
+  },
+  "Integrals": {
+    "name": "Khan Academy - Integral Calculus",
+    "url": "https://www.khanacademy.org/math/integral-calculus",
+    "description": "A course on integral calculus."
+  },
+  "Optimization": {
+    "name": "Gurobi - Introduction to Optimization Through the Lens of Data Science",
+    "url": "https://www.gurobi.com/resources/online-learning-and-training/data-science-course/",
+    "description": "An introductory course on optimization for data science."
+  },
+  "Multivariable Calculus": {
+    "name": "MIT OpenCourseWare - Multivariable Calculus (18.02)",
+    "url": "https://ocw.mit.edu/courses/18-02-multivariable-calculus-fall-2007/",
+    "description": "A course on multivariable calculus from MIT."
+  },
+  "Series and Sequences": {
+    "name": "Khan Academy - Calculus 2",
+    "url": "https://www.khanacademy.org/math/calculus-2",
+    "description": "A course on calculus 2."
+  },
+  "Calculus": {
+    "name": "MIT OpenCourseWare - Single Variable Calculus",
+    "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/",
+    "description": "A course on single variable calculus from MIT."
+  },
+  "Finite Automata": {
+    "name": "edX - Automata Theory (Stanford University)",
+    "url": "https://www.edx.org/course/automata-theory",
+    "description": "A course on automata theory from Stanford."
+  },
+  "Turing Machines": {
+    "name": "MIT OpenCourseWare - Theory of Computation",
+    "url": "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/",
+    "description": "A course on the theory of computation from MIT."
+  },
+  "Regular Expressions": {
+    "name": "RegexOne",
+    "url": "https://regexone.com/",
+    "description": "An interactive tutorial for learning regular expressions."
+  },
+  "Computability and Decidability": {
+    "name": "MIT OpenCourseWare - Automata, Computability, and Complexity",
+    "url": "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/",
+    "description": "A course on automata, computability, and complexity from MIT."
+  },
+  "Context-Free Grammars": {
+    "name": "edX - Automata Theory (Stanford University)",
+    "url": "https://www.edx.org/course/automata-theory",
+    "description": "A course on automata theory from Stanford."
+  },
+  "Compiler Design": {
+    "name": "edX - Compilers (Stanford University)",
+    "url": "https://www.edx.org/course/compilers",
+    "description": "A course on compilers from Stanford."
+  },
+  "Automata Theory and Formal Languages": {
+    "name": "NPTEL - Theory of Automata, Formal Languages and Computation",
+    "url": "https://nptel.ac.in/courses/106105031",
+    "description": "A course on the theory of automata, formal languages, and computation."
+  },
+  "Entropy and Information Content": {
+    "name": "Santa Fe Institute - Introduction to Information Theory",
+    "url": "https://www.complexityexplorer.org/courses/11-introduction-to-information-theory",
+    "description": "An introductory course on information theory."
+  },
+  "Error Correction Codes": {
+    "name": "IISc Bangalore - Error Correcting Codes",
+    "url": "https://freevideolectures.com/course/2256/error-correcting-codes",
+    "description": "A course on error-correcting codes."
+  },
+  "Source Coding": {
+    "name": "MIT OpenCourseWare - Information Theory",
+    "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/",
+    "description": "A course on information theory from MIT."
+  },
+  "Data Compression": {
+    "name": "Alison - Data Compression Methods in Information Theory",
+    "url": "https://alison.com/courses/data-compression-methods-in-information-theory",
+    "description": "A course on data compression methods."
+  },
+  "Channel Capacity": {
+    "name": "Alison - Channel Coding | Capacity | Information Theory",
+    "url": "https://alison.com/courses/channel-coding-capacity-information-theory",
+    "description": "A course on channel coding and capacity."
+  },
+  "Information Theory": {
+    "name": "MIT OpenCourseWare - Information Theory",
+    "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/",
+    "description": "A course on information theory from MIT."
+  },
+  "Computer Architecture and Organization": {
+    "name": "edX - Computer Architecture (The University of British Columbia)",
+    "url": "https://www.edx.org/course/computer-architecture",
+    "description": "A course on computer architecture from The University of British Columbia."
+  },
+  "Root Finding": {
+    "name": "YouTube - Introduction to Root Finding Algorithms (Full Course)",
+    "url": "https://www.youtube.com/watch?v=xprPUPvr6iE",
+    "description": "A full course on root finding algorithms on YouTube."
+  },
+  "Numerical Linear Algebra": {
+    "name": "MIT OpenCourseWare - Introduction to Numerical Methods (18.335J)",
+    "url": "https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-fall-2010/",
+    "description": "An introductory course on numerical methods from MIT."
+  },
+  "Interpolation and Approximation": {
+    "name": "MIT OpenCourseWare - Interpolation (Nutshell)",
+    "url": "https://ocw.mit.edu/courses/2-086-numerical-computation-for-mechanical-engineers-fall-2014/resources/interpolation-nutshell/",
+    "description": "A nutshell video on interpolation from MIT."
+  },
+  "Optimization Algorithms": {
+    "name": "edX - Optimization: principles and algorithms - Linear optimization (EPFLx)",
+    "url": "https://www.edx.org/course/optimization-principles-and-algorithms-linear-optimization",
+    "description": "A course on optimization principles and algorithms."
+  },
+  "Numerical Integration": {
+    "name": "YouTube - Numerical Integration Crash Course",
+    "url": "https://www.youtube.com/watch?v=d_p-s_V3D8U",
+    "description": "A crash course on numerical integration on YouTube."
+  },
+  "Boolean Algebra": {
+    "name": "YouTube - Digital Circuits Boolean Algebra",
+    "url": "https://www.youtube.com/watch?v=gI-qXk7XojA",
+    "description": "A YouTube video on boolean algebra in digital circuits."
+  },
+  "Sequential Circuits": {
+    "name": "Alison - Introduction to Sequential Circuits",
+    "url": "https://alison.com/courses/introduction-to-sequential-circuits",
+    "description": "An introductory course on sequential circuits."
+  },
+  "Logic Gates": {
+    "name": "YouTube - Logic Gates, Truth Tables, Boolean Algebra - AND, OR, NOT, NAND & NOR",
+    "url": "https://www.youtube.com/watch?v=UteS_lK1K3E",
+    "description": "A YouTube video on logic gates, truth tables, and boolean algebra."
+  },
+  "Flip-Flops and Registers": {
+    "name": "YouTube - Mastering Sequential Circuits: Flip-Flops, Registers, and Counters in Logisim",
+    "url": "https://www.youtube.com/watch?v=r4dG2A-o_gE",
+    "description": "A YouTube video on flip-flops, registers, and counters."
+  },
+  "Combinational Circuits": {
+    "name": "edX - Computation Structures - Part 1: Digital Circuits (MIT)",
+    "url": "https://www.edx.org/course/computation-structures-part-1-digital-circuits",
+    "description": "A course on digital circuits from MIT."
+  },
+  "Memory Systems": {
+    "name": "Brilliant.org - Computer Memory",
+    "url": "https://brilliant.org/courses/computer-memory/",
+    "description": "A course on computer memory."
+  },
+  "Digital Logic": {
+    "name": "YouTube - Digital Logic Design FREE Full Course",
+    "url": "https://www.youtube.com/watch?v=x_c23-53Y2A",
+    "description": "A free full course on digital logic design on YouTube."
+  },
+  "CPU Architecture": {
+    "name": "edX - Computer Architecture (The University of British Columbia)",
+    "url": "https://www.edx.org/course/computer-architecture",
+    "description": "A course on computer architecture from The University of British Columbia."
+  },
+  "Input/Output Systems": {
+    "name": "edX - Embedded Systems - Shape The World: Microcontroller Input/Output (The University of Texas at Austin)",
+    "url": "https://www.edx.org/course/embedded-systems-shape-the-world-microcontroller-inputoutput",
+    "description": "A course on microcontroller input/output."
+  },
+  "Instruction Set Architecture (ISA)": {
+    "name": "edX - Computation Structures - Part 2: Computer Architecture (MIT)",
+    "url": "https://www.edx.org/course/computation-structures-part-2-computer-architecture",
+    "description": "A course on computer architecture from MIT."
+  },
+  "Pipelining": {
+    "name": "edX - Computation Structures - Part 3: Computer Organization (MIT)",
+    "url": "https://www.edx.org/course/computation-structures-part-3-computer-organization",
+    "description": "A course on computer organization from MIT."
+  },
+  "Memory Hierarchy": {
+    "name": "edX - Computation Structures - Part 2: Computer Architecture (MIT)",
+    "url": "https://www.edx.org/course/computation-structures-part-2-computer-architecture",
+    "description": "A course on computer architecture from MIT."
+  },
+  "Cache Memory": {
+    "name": "edX - Computation Structures - Part 2: Computer Architecture (MIT)",
+    "url": "https://www.edx.org/course/computation-structures-part-2-computer-architecture",
+    "description": "A course on computer architecture from MIT."
+  },
+  "Computer Organization": {
+    "name": "Swayam/NPTEL - Computer Architecture and Organization (IIT Kharagpur)",
+    "url": "https://nptel.ac.in/courses/106105163",
+    "description": "A course on computer architecture and organization."
+  },
+  "Process Management": {
+    "name": "Great Learning Academy - Process Management Course",
+    "url": "https://www.mygreatlearning.com/academy/learn-for-free/courses/process-management",
+    "description": "A course on process management."
+  },
+  "Input/Output Management": {
+    "name": "edX - Embedded Systems - Shape The World: Microcontroller Input/Output (The University of Texas at Austin)",
+    "url": "https://www.edx.org/course/embedded-systems-shape-the-world-microcontroller-inputoutput",
+    "description": "A course on microcontroller input/output."
+  },
+  "File Systems": {
+    "name": "freeCodeCamp - File System and Command Line",
+    "url": "https://www.youtube.com/watch?v=2-v6V69A458",
+    "description": "A YouTube video on file systems and the command line."
+  },
+  "Virtualization": {
+    "name": "edX - Introduction to Cloud and Virtualization (The Linux Foundation)",
+    "url": "https://www.edx.org/course/introduction-to-cloud-and-virtualization",
+    "description": "An introductory course on cloud and virtualization."
+  },
+  "Operating Systems": {
+    "name": "freeCodeCamp - Operating Systems - Course for Beginners",
+    "url": "https://www.youtube.com/watch?v=vBURS63w4zI",
+    "description": "A course for beginners on operating systems."
+  },
+  "Network Topologies": {
+    "name": "YouTube - CompTIA Network+ N10-008 Full Course for Beginners - Network Topologies",
+    "url": "https://www.youtube.com/watch?v=g-w3aA2-h8E",
+    "description": "A YouTube video on network topologies for beginners."
+  },
+  "Routing Algorithms": {
+    "name": "YouTube - Routing Algorithms (part 1) - Georgia Tech - Network Congestion and Control",
+    "url": "https://www.youtube.com/watch?v=s_Yv_pW-c3s",
+    "description": "A YouTube video on routing algorithms from Georgia Tech."
+  },
+  "Network Protocols (TCP/IP)": {
+    "name": "freeCodeCamp - TCP/IP and the OSI Model Explained!",
+    "url": "https://www.youtube.com/watch?v=2-v6V69A458",
+    "description": "A YouTube video explaining TCP/IP and the OSI model."
+  },
+  "Network Layers (OSI Model)": {
+    "name": "YouTube - OSI Model Explained - Cisco CCNA-CompTIA A+-Network+",
+    "url": "https://www.youtube.com/watch?v=v2-h_a1G6p0",
+    "description": "A YouTube video explaining the OSI model."
+  },
+  "Wireless Networks": {
+    "name": "edX - Wireless Communications for Everybody (Yonsei University)",
+    "url": "https://www.edx.org/course/wireless-communications-for-everybody",
+    "description": "A course on wireless communications for everybody."
+  },
+  "Computer Networks": {
+    "name": "freeCodeCamp - Computer Networking Course - Beginner to Advanced",
+    "url": "https://www.youtube.com/watch?v=IPvYjXCsTg8",
+    "description": "A course on computer networking from beginner to advanced."
+  },
+  "Parallel Architectures": {
+    "name": "edX - Computation Structures - Part 3: Computer Organization (MIT)",
+    "url": "https://www.edx.org/course/computation-structures-part-3-computer-organization",
+    "description": "A course on computer organization from MIT."
+  },
+  "Concurrency Control": {
+    "name": "YouTube - CMU Intro to Database Systems - Concurrency Control",
+    "url": "https://www.youtube.com/playlist?list=PLSE8ODLCdTWo2cSA2tWMA-h8qD9-2XlF-",
+    "description": "A YouTube playlist on concurrency control in database systems."
+  },
+  "Parallel Programming Models": {
+    "name": "openHPI - Parallel Programming Concepts",
+    "url": "https://open.hpi.de/courses/parprog2017",
+    "description": "A course on parallel programming concepts."
+  },
+  "Distributed Systems Concepts": {
+    "name": "University of Cambridge - Distributed Systems",
+    "url": "https://www.cl.cam.ac.uk/teaching/2021/DistSystems/",
+    "description": "A course on distributed systems from the University of Cambridge."
+  },
+  "Parallel and Distributed Computing": {
+    "name": "edX - Introduction to High-Performance and Parallel Computing (University of Colorado Boulder)",
+    "url": "https://www.edx.org/course/introduction-to-high-performance-and-parallel-computing",
+    "description": "An introductory course on high-performance and parallel computing."
+  },
+  "Artificial Intelligence": {
+    "name": "University of Helsinki & MinnaLearn - Elements of AI",
+    "url": "https://www.elementsofai.com/",
+    "description": "A free online course on the elements of AI."
+  },
+  "Microcontrollers": {
+    "name": "ATE Central - Introduction to Microcontrollers",
+    "url": "https://atecentral.net/curriculum/18251/introduction-to-microcontrollers",
+    "description": "An introductory course on microcontrollers."
+  },
+  "Embedded Programming": {
+    "name": "freeCodeCamp - Embedded Systems Programming Course",
+    "url": "https://www.youtube.com/watch?v=oN-l8aY-44Y",
+    "description": "A YouTube course on embedded systems programming."
+  },
+  "Real-Time Operating Systems (RTOS)": {
+    "name": "YouTube - Real Time Operating Systems (Nate Graff)",
+    "url": "https://www.youtube.com/playlist?list=PL2_d2M-i0-kC_sW-yWk-3yG6Ea5bE4gT-",
+    "description": "A YouTube playlist on real-time operating systems."
+  },
+  "System-on-Chip (SoC) Design": {
+    "name": "edX - Introduction to System on Chip Design (King's College London)",
+    "url": "https://www.edx.org/course/introduction-to-system-on-chip-design",
+    "description": "An introductory course on system on chip design."
+  },
+  "Sensors and Actuators": {
+    "name": "Swayam - Sensors and Actuators (Indian Institute of Science Bangalore)",
+    "url": "https://onlinecourses.nptel.ac.in/noc21_ee33/preview",
+    "description": "A course on sensors and actuators."
+  },
+  "Power Management": {
+    "name": "Schneider Electric - Energy University",
+    "url": "https://www.se.com/us/en/work/services/training/energy-university/",
+    "description": "An online university for energy management."
+  },
+  "Embedded Systems": {
+    "name": "freeCodeCamp - Embedded Systems Programming Course",
+    "url": "https://www.youtube.com/watch?v=oN-l8aY-44Y",
+    "description": "A YouTube course on embedded systems programming."
+  },
+  "Supervised Learning": {
+    "name": "edX - Machine Learning with Python: A Practical Introduction (IBM)",
+    "url": "https://www.edx.org/course/machine-learning-with-python-a-practical-introduction",
+    "description": "A practical introduction to machine learning with Python."
+  },
+  "Model Evaluation and Selection": {
+    "name": "edX - Machine Learning with Python: A Practical Introduction (IBM)",
+    "url": "https://www.edx.org/course/machine-learning-with-python-a-practical-introduction",
+    "description": "A practical introduction to machine learning with Python."
+  },
+  "Unsupervised Learning": {
+    "name": "edX - Machine Learning with Python: A Practical Introduction (IBM)",
+    "url": "https://www.edx.org/course/machine-learning-with-python-a-practical-introduction",
+    "description": "A practical introduction to machine learning with Python."
+  },
+  "Robot Kinematics and Dynamics": {
+    "name": "edX - Robotics: Kinematics and Mathematical Foundations (University of Pennsylvania)",
+    "url": "https://www.edx.org/course/robotics-kinematics-and-mathematical-foundations",
+    "description": "A course on the kinematics and mathematical foundations of robotics."
+  },
+  "Robot Control": {
+    "name": "edX - Robotics: Dynamics and Control (University of Pennsylvania)",
+    "url": "https://www.edx.org/course/robotics-dynamics-and-control",
+    "description": "A course on the dynamics and control of robots."
+  },
+  "Path Planning": {
+    "name": "edX - Robotics: Perception (University of Pennsylvania)",
+    "url": "https://www.edx.org/course/robotics-perception",
+    "description": "A course on robot perception, which includes path planning."
+  },
+  "Logic Programming": {
+    "name": "edX - Paradigms of Computer Programming – Fundamentals (Université catholique de Louvain)",
+    "url": "https://www.edx.org/course/paradigms-of-computer-programming-fundamentals",
+    "description": "A course on the fundamentals of computer programming paradigms, including logic programming."
+  },
+  "Bias in AI": {
+    "name": "edX - AI Fairness: Addressing Bias in AI (The Linux Foundation)",
+    "url": "https://www.edx.org/course/ai-fairness-addressing-bias-in-ai",
+    "description": "A course on addressing bias in AI."
+  },
+  "Privacy Concerns": {
+    "name": "edX - Data Ethics, AI and Responsible Innovation (The University of Edinburgh)",
+    "url": "https://www.edx.org/learn/computer-programming/the-university-of-edinburgh-Data-Ethics-AI-and-Responsible-Innovation",
+    "description": "A course on data ethics, AI, and responsible innovation."
+  },
+  "Fairness and Accountability": {
+    "name": "edX - AI Fairness: Addressing Bias in AI (The Linux Foundation)",
+    "url": "https://www.edx.org/course/ai-fairness-addressing-bias-in-ai",
+    "description": "A course on addressing bias in AI."
+  },
+  "AI Safety": {
+    "name": "YouTube - AI Safety and Alignment",
+    "url": "https://www.youtube.com/watch?v=b-pCo1J1p0o",
+    "description": "A YouTube video on AI safety and alignment."
+  },
+  "Transparency and Explainability": {
+    "name": "edX - Explainable AI (XAI) (IBM)",
+    "url": "https://www.edx.org/course/explainable-ai-xai",
+    "description": "A course on explainable AI (XAI)."
+  },
+  "Social Impact of AI": {
+    "name": "edX - Data Ethics, AI and Responsible Innovation (The University of Edinburgh)",
+    "url": "https://www.edx.org/learn/computer-programming/the-university-of-edinburgh-Data-Ethics-AI-and-Responsible-Innovation",
+    "description": "A course on data ethics, AI, and responsible innovation."
+  },
+  "Data Sources and Acquisition": {
+    "name": "edX - Introduction to Data Science (IBM)",
+    "url": "https://www.edx.org/course/introduction-to-data-science",
+    "description": "An introductory course on data science from IBM."
+  },
+  "Data Integration": {
+    "name": "edX - Data Engineering with Databricks (Databricks)",
+    "url": "https://www.edx.org/course/data-engineering-with-databricks",
+    "description": "A course on data engineering with Databricks."
+  },
+  "Data Cleaning": {
+    "name": "edX - Data Cleaning and Preparation (IBM)",
+    "url": "https://www.edx.org/course/data-cleaning-and-preparation",
+    "description": "A course on data cleaning and preparation."
+  },
+  "Data Reduction": {
+    "name": "edX - Data Science: Wrangling (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-wrangling",
+    "description": "A course on data wrangling from Harvard."
+  },
+  "Data Transformation": {
+    "name": "edX - Data Science: Wrangling (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-wrangling",
+    "description": "A course on data wrangling from Harvard."
+  },
+  "Feature Selection": {
+    "name": "edX - Feature Selection and Engineering (IBM)",
+    "url": "https://www.edx.org/course/feature-selection-and-engineering",
+    "description": "A course on feature selection and engineering."
+  },
+  "Data Collection and Preprocessing": {
+    "name": "edX - Data Science: Wrangling (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-wrangling",
+    "description": "A course on data wrangling from Harvard."
+  },
+  "Descriptive Statistics": {
+    "name": "edX - Introduction to Statistics: Descriptive Statistics (UC Berkeley)",
+    "url": "https://www.edx.org/course/introduction-to-statistics-descriptive-statistics",
+    "description": "An introductory course on descriptive statistics."
+  },
+  "Hypothesis Testing": {
+    "name": "edX - Introduction to Statistics: Inference (UC Berkeley)",
+    "url": "https://www.edx.org/course/introduction-to-statistics-inference",
+    "description": "An introductory course on statistical inference."
+  },
+  "Exploratory Data Analysis (EDA)": {
+    "name": "edX - Data Science: Visualization (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-visualization",
+    "description": "A course on data visualization from Harvard."
+  },
+  "Data Analysis and Visualization": {
+    "name": "edX - Data Science: Visualization (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-visualization",
+    "description": "A course on data visualization from Harvard."
+  },
+  "Linear Regression": {
+    "name": "edX - Data Science: Linear Regression (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-linear-regression",
+    "description": "A course on linear regression from Harvard."
+  },
+  "Logistic Regression": {
+    "name": "edX - Data Science: Machine Learning (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-machine-learning",
+    "description": "A course on machine learning from Harvard."
+  },
+  "Clustering Algorithms": {
+    "name": "edX - Data Science: Machine Learning (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-machine-learning",
+    "description": "A course on machine learning from Harvard."
+  },
+  "Time Series Models": {
+    "name": "edX - Time Series Analysis (The State University of New York)",
+    "url": "https://www.edx.org/course/time-series-analysis",
+    "description": "A course on time series analysis."
+  },
+  "Dimensionality Reduction": {
+    "name": "edX - Data Science: Machine Learning (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-machine-learning",
+    "description": "A course on machine learning from Harvard."
+  },
+  "Hadoop": {
+    "name": "edX - Big Data Fundamentals (The University of Adelaide)",
+    "url": "https://www.edx.org/course/big-data-fundamentals",
+    "description": "A course on big data fundamentals."
+  },
+  "Pig": {
+    "name": "edX - Big Data Analytics Using Spark (The University of Adelaide)",
+    "url": "https://www.edx.org/course/big-data-analytics-using-spark",
+    "description": "A course on big data analytics using Spark."
+  },
+  "Spark": {
+    "name": "edX - Big Data Analytics Using Spark (The University of Adelaide)",
+    "url": "https://www.edx.org/course/big-data-analytics-using-spark",
+    "description": "A course on big data analytics using Spark."
+  },
+  "Hive": {
+    "name": "edX - Big Data Analytics Using Spark (The University of Adelaide)",
+    "url": "https://www.edx.org/course/big-data-analytics-using-spark",
+    "description": "A course on big data analytics using Spark."
+  },
+  "Clustering": {
+    "name": "edX - Data Science: Machine Learning (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-machine-learning",
+    "description": "A course on machine learning from Harvard."
+  },
+  "Classification": {
+    "name": "edX - Data Science: Machine Learning (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-machine-learning",
+    "description": "A course on machine learning from Harvard."
+  },
+  "Anomaly Detection": {
+    "name": "YouTube - Anomaly Detection | Anomaly Detection In Machine Learning | Machine Learning Tutorial | Simplilearn",
+    "url": "https://www.youtube.com/watch?v=3-h4-Vj2k3A",
+    "description": "A YouTube video on anomaly detection in machine learning."
+  },
+  "Regression": {
+    "name": "edX - Data Science: Linear Regression (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-linear-regression",
+    "description": "A course on linear regression from Harvard."
+  },
+  "Recommendation Systems": {
+    "name": "edX - Data Science: Machine Learning (Harvard University)",
+    "url": "https://www.edx.org/course/data-science-machine-learning",
+    "description": "A course on machine learning from Harvard."
+  },
+  "Ethical Considerations in Data Analysis": {
+    "name": "edX - Data Ethics, AI and Responsible Innovation (The University of Edinburgh)",
+    "url": "https://www.edx.org/learn/computer-programming/the-university-of-edinburgh-Data-Ethics-AI-and-Responsible-Innovation",
+    "description": "A course on data ethics, AI, and responsible innovation."
+  },
+  "Responsible Data Use": {
+    "name": "edX - Data Ethics, AI and Responsible Innovation (The University of Edinburgh)",
+    "url": "https://www.edx.org/learn/computer-programming/the-university-of-edinburgh-Data-Ethics-AI-and-Responsible-Innovation",
+    "description": "A course on data ethics, AI, and responsible innovation."
+  },
+  "HTML": {
+    "name": "freeCodeCamp - HTML & CSS Full Course - Beginner to Pro",
+    "url": "https://www.youtube.com/watch?v=G3e-cpL7ofc",
+    "description": "A full course on HTML and CSS for beginners."
+  },
+  "Front-End Frameworks (e.g., React, Angular, Vue.js)": {
+    "name": "freeCodeCamp - Learn React - Full Course for Beginners",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
+    "description": "A full course on React for beginners."
+  },
+  "CSS": {
+    "name": "freeCodeCamp - HTML & CSS Full Course - Beginner to Pro",
+    "url": "https://www.youtube.com/watch?v=G3e-cpL7ofc",
+    "description": "A full course on HTML and CSS for beginners."
+  },
+  "Responsive Web Design": {
+    "name": "freeCodeCamp - Responsive Web Design",
+    "url": "https://www.freecodecamp.org/learn/responsive-web-design/",
+    "description": "A certification on responsive web design."
+  },
+  "JavaScript": {
+    "name": "freeCodeCamp - JavaScript Algorithms and Data Structures",
+    "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
+    "description": "A certification on JavaScript algorithms and data structures."
+  },
+  "Front-End Development": {
+    "name": "freeCodeCamp - Front End Development Libraries",
+    "url": "https://www.freecodecamp.org/learn/front-end-development-libraries/",
+    "description": "A certification on front-end development libraries."
+  },
+  "Server-Side Programming Languages (e.g., Python, Java, Node.js)": {
+    "name": "freeCodeCamp - Back End Development and APIs",
+    "url": "https://www.freecodecamp.org/learn/back-end-development-and-apis/",
+    "description": "A certification on back-end development and APIs."
+  },
+  "API Design and Development": {
+    "name": "freeCodeCamp - Back End Development and APIs",
+    "url": "https://www.freecodecamp.org/learn/back-end-development-and-apis/",
+    "description": "A certification on back-end development and APIs."
+  },
+  "Web Frameworks (e.g., Django, Spring, Express.js)": {
+    "name": "freeCodeCamp - Back End Development and APIs",
+    "url": "https://www.freecodecamp.org/learn/back-end-development-and-apis/",
+    "description": "A certification on back-end development and APIs."
+  },
+  "Databases (Relational and NoSQL)": {
+    "name": "freeCodeCamp - Databases",
+    "url": "https://www.freecodecamp.org/news/tag/databases/",
+    "description": "A collection of articles and tutorials on databases."
+  },
+  "Server Management and Deployment": {
+    "name": "freeCodeCamp - DevOps with Docker, Kubernetes, and Terraform",
+    "url": "https://www.youtube.com/watch?v=hmkIay6sK34",
+    "description": "A YouTube course on DevOps with Docker, Kubernetes, and Terraform."
+  },
+  "Back-End Development": {
+    "name": "freeCodeCamp - Back End Development and APIs",
+    "url": "https://www.freecodecamp.org/learn/back-end-development-and-apis/",
+    "description": "A certification on back-end development and APIs."
+  },
+  "Front-End and Back-End Integration": {
+    "name": "freeCodeCamp - Full Stack Web Development",
+    "url": "https://www.freecodecamp.org/learn/",
+    "description": "A learning path on full-stack web development."
+  },
+  "Full-Stack Development": {
+    "name": "freeCodeCamp - Full Stack Web Development",
+    "url": "https://www.freecodecamp.org/learn/",
+    "description": "A learning path on full-stack web development."
+  },
+  "Native Mobile Development (iOS and Android)": {
+    "name": "freeCodeCamp - React Native for Beginners",
+    "url": "https://www.youtube.com/watch?v=0-S5a0eXPoc",
+    "description": "A course on React Native for beginners."
+  },
+  "Cross-Platform Mobile Development (e.g., React Native, Flutter)": {
+    "name": "freeCodeCamp - React Native for Beginners",
+    "url": "https://www.youtube.com/watch?v=0-S5a0eXPoc",
+    "description": "A course on React Native for beginners."
+  },
+  "Mobile UI/UX Design": {
+    "name": "edX - Mobile App Design and Prototyping for Everybody (University of Michigan)",
+    "url": "https://www.edx.org/course/mobile-app-design-and-prototyping-for-everybody",
+    "description": "A course on mobile app design and prototyping."
+  },
+  "Web Security": {
+    "name": "edX - Web Security Fundamentals (The Linux Foundation)",
+    "url": "https://www.edx.org/course/web-security-fundamentals",
+    "description": "A course on web security fundamentals."
+  },
+  "Network Protocols and Security": {
+    "name": "edX - Network Security (The Linux Foundation)",
+    "url": "https://www.edx.org/course/network-security",
+    "description": "A course on network security."
+  },
+  "Mobile Application Security": {
+    "name": "edX - Mobile Application Security (The Linux Foundation)",
+    "url": "https://www.edx.org/course/mobile-application-security",
+    "description": "A course on mobile application security."
+  },
+  "Web Application Security": {
+    "name": "edX - Web Security Fundamentals (The Linux Foundation)",
+    "url": "https://www.edx.org/course/web-security-fundamentals",
+    "description": "A course on web security fundamentals."
+  },
+  "User Authentication and Authorization": {
+    "name": "freeCodeCamp - Authentication and Authorization",
+    "url": "https://www.youtube.com/watch?v=g_aM9Lp4g0A",
+    "description": "A YouTube video on authentication and authorization."
+  },
+  "Access Control": {
+    "name": "edX - Identity and Access Management (The Linux Foundation)",
+    "url": "https://www.edx.org/course/identity-and-access-management",
+    "description": "A course on identity and access management."
+  },
+  "Incident Response Planning": {
+    "name": "edX - Incident Response (The Linux Foundation)",
+    "url": "https://www.edx.org/course/incident-response",
+    "description": "A course on incident response."
+  },
+  "Security Policies and Procedures": {
+    "name": "edX - Security Policy and Compliance (The Linux Foundation)",
+    "url": "https://www.edx.org/course/security-policy-and-compliance",
+    "description": "A course on security policy and compliance."
+  },
+  "Game Mechanics": {
+    "name": "edX - Game Design: Art and Concepts (University of California, Irvine)",
+    "url": "https://www.edx.org/course/game-design-art-and-concepts",
+    "description": "A course on game design, art, and concepts."
+  },
+  "Game Design": {
+    "name": "edX - Game Design: Art and Concepts (University of California, Irvine)",
+    "url": "https://www.edx.org/course/game-design-art-and-concepts",
+    "description": "A course on game design, art, and concepts."
+  },
+  "Game Engines (e.g., Unity, Unreal Engine)": {
+    "name": "edX - Introduction to Game Development with Unity (Harvard University)",
+    "url": "https://www.edx.org/course/cs50s-introduction-to-game-development",
+    "description": "An introductory course on game development with Unity from Harvard."
+  },
+  "Programming Languages (e.g., C#, C++)": {
+    "name": "freeCodeCamp - C# Tutorial - Full Course for Beginners",
+    "url": "https://www.youtube.com/watch?v=GhQdlIFylQ8",
+    "description": "A full course on C# for beginners."
+  },
+  "Game Physics": {
+    "name": "edX - Introduction to Game Development with Unity (Harvard University)",
+    "url": "https://www.edx.org/course/cs50s-introduction-to-game-development",
+    "description": "An introductory course on game development with Unity from Harvard."
+  },
+  "Game Logic and Scripting": {
+    "name": "edX - Introduction to Game Development with Unity (Harvard University)",
+    "url": "https://www.edx.org/course/cs50s-introduction-to-game-development",
+    "description": "An introductory course on game development with Unity from Harvard."
+  },
+  "Game Programming": {
+    "name": "edX - Introduction to Game Development with Unity (Harvard University)",
+    "url": "https://www.edx.org/course/cs50s-introduction-to-game-development",
+    "description": "An introductory course on game development with Unity from Harvard."
+  },
+  "2D and 3D Graphics": {
+    "name": "edX - Computer Graphics (UC San Diego)",
+    "url": "https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x",
+    "description": "A course on computer graphics."
+  },
+  "Graphics and Animation": {
+    "name": "edX - Animation and CGI Motion (Columbia University)",
+    "url": "https://www.edx.org/course/animation-and-cgi-motion",
+    "description": "A course on animation and CGI motion."
+  },
+  "Game Testing and Quality Assurance": {
+    "name": "YouTube - Game Testing - A Crash Course",
+    "url": "https://www.youtube.com/watch?v=qD0K5-1L6wA",
+    "description": "A crash course on game testing."
+  },
+  "Game Development Process": {
+    "name": "edX - Game Design: Art and Concepts (University of California, Irvine)",
+    "url": "https://www.edx.org/course/game-design-art-and-concepts",
+    "description": "A course on game design, art, and concepts."
+  },
+  "Software Engineering": {
+    "name": "edX - Introduction to Software Engineering (The Linux Foundation)",
+    "url": "https://www.edx.org/course/introduction-to-software-engineering",
+    "description": "An introductory course on software engineering."
+  },
+  "Project Planning": {
+    "name": "edX - Project Management Life Cycle (RIT)",
+    "url": "https://www.edx.org/course/project-management-life-cycle",
+    "description": "A course on the project management life cycle."
+  },
+  "2D Graphics": {
+    "name": "edX - Computer Graphics (UC San Diego)",
+    "url": "https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x",
+    "description": "A course on computer graphics."
+  },
+  "3D Graphics": {
+    "name": "edX - Computer Graphics (UC San Diego)",
+    "url": "https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x",
+    "description": "A course on computer graphics."
+  },
+  "Rendering Techniques": {
+    "name": "edX - Computer Graphics (UC San Diego)",
+    "url": "https://www.edx.org/course/computer-graphics-uc-san-diegox-cse167x",
+    "description": "A course on computer graphics."
+  },
+  "Animation": {
+    "name": "edX - Animation and CGI Motion (Columbia University)",
+    "url": "https://www.edx.org/course/animation-and-cgi-motion",
+    "description": "A course on animation and CGI motion."
+  },
+  "Distributed Systems": {
+    "name": "edX - Distributed Systems (The Linux Foundation)",
+    "url": "https://www.edx.org/course/distributed-systems",
+    "description": "A course on distributed systems."
+  },
+  "Authentication and Authorization Mechanisms": {
+    "name": "freeCodeCamp - Authentication and Authorization",
+    "url": "https://www.youtube.com/watch?v=g_aM9Lp4g0A",
+    "description": "A YouTube video on authentication and authorization."
+  },
+  "Game Production and Project Management": {
+    "name": "edX - Project Management for Game Development (RIT)",
+    "url": "https://www.edx.org/course/project-management-for-game-development",
+    "description": "A course on project management for game development."
+  },
+  "Software Project Management": {
+    "name": "edX - Software Development Project Management (The Linux Foundation)",
+    "url": "https://www.edx.org/course/software-development-project-management",
+    "description": "A course on software development project management."
+  },
+  "Geometric Modeling": {
+    "name": "edX - Geometric Modeling (Purdue University)",
+    "url": "https://www.edx.org/course/geometric-modeling",
+    "description": "A course on geometric modeling."
+  },
+  "Requirements Management": {
+    "name": "edX - Requirements Engineering (The Linux Foundation)",
+    "url": "https://www.edx.org/course/requirements-engineering",
+    "description": "A course on requirements engineering."
+  },
+  "Volumetric Modeling": {
+    "name": "Models in Architecture – design through physical & digital models | DelftX on edX",
+    "url": "https://www.edx.org/learn/architecture/delft-university-of-technology-models-in-architecture",
+    "description": "A course on architectural design using physical and digital models."
+  },
+  "Data Anonymization": {
+    "name": "edX - Data Privacy and Anonymization in Python (IBM)",
+    "url": "https://www.edx.org/course/data-privacy-and-anonymization-in-python",
+    "description": "A course on data privacy and anonymization in Python."
+  }
+}
