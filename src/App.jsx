@@ -22,7 +22,7 @@ const StudyMode = lazy(loadStudyMode);
 const GraphView = lazy(loadGraphView);
 const Planner = lazy(() => import('./pages/Planner'));
 const Settings = lazy(() => import('./pages/Settings'));
-const Admin = lazy(() => import('./pages/Admin'));
+const Admin = lazy(() => import('./pages/AdminDashboard'));
 const Terms = lazy(loadTerms);
 const Credits = lazy(loadCredits);
 
@@ -61,7 +61,7 @@ const PageLoader = () => (
 function App() {
     return (
         <OSSUProvider>
-            <Router>
+            <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <RoutePrefetcher />
                 <Layout>
                     <div className="flex flex-col min-h-screen">

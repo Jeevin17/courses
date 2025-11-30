@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { ossuData } from '../data/ossu-data';
 import { roadmapShData } from '../data/roadmap-sh-data';
 import { physicsData } from '../data/physics-data';
 import { useOSSUStore } from '../hooks/useOSSUStore';
-import { Play, Pause, RotateCcw, ArrowLeft, Volume2, VolumeX, Settings, CheckCircle, Edit2, Plus, X } from 'lucide-react';
+import { Play, Pause, RotateCcw, ArrowLeft, Volume2, VolumeX, Settings, CheckCircle, Edit2, Plus, X, LayoutDashboard, List } from 'lucide-react';
 import { formatTime } from '../utils/timeUtils';
 
-// Audio Context for Brown Noise
+// Audio Context for Brown Noise (Unchanged)
 const AudioController = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(0.5);
@@ -80,82 +80,62 @@ const AudioController = () => {
 };
 
 export default function StudyMode() {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const courseId = searchParams.get('id');
-    const { progress, updateStatus, addStudyTime, setStudyTime, getCourseProgress } = useOSSUStore();
+    const {
+        progress, updateStatus, addStudyTime, setStudyTime, getCourseProgress,
+        activeSessions, startSession, pauseSession, resumeSession, stopSession, findCourse
+    } = useOSSUStore();
 
-    const [timer, setTimer] = useState(25 * 60);
-    const [isActive, setIsActive] = useState(false);
-    const [isBreak, setIsBreak] = useState(false);
     const [customTime, setCustomTime] = useState(25);
     const [showSettings, setShowSettings] = useState(false);
     const [showManualEntry, setShowManualEntry] = useState(false);
     const [manualMinutes, setManualMinutes] = useState(60);
+    const [showSessionList, setShowSessionList] = useState(false);
 
-    // Track session time to commit on pause/stop
-    const sessionTimeRef = useRef(0);
+    // Combine all courses and topics from all data sources (using store helper if possible, but store helper is 'findCourse')
+    // We need 'findCourse' to get title for the list.
 
-    // Combine all courses and topics from all data sources
-    const allItems = [
-        ...ossuData.flatMap(s => s.courses || []),
-        ...roadmapShData.flatMap(s => [...(s.courses || []), ...(s.topics || [])]),
-        ...physicsData.flatMap(s => [...(s.courses || []), ...(s.topics || [])])
-    ];
+    // Handle Navigation / Empty State
+    // If no courseId, we stay on the "Ready to Focus" screen, but now we list active sessions there too.
 
-    const course = allItems.find(c => c.id === courseId);
-    const courseProgress = getCourseProgress(courseId);
+    const activeSessionKeys = Object.keys(activeSessions || {});
+    const hasActiveSessions = activeSessionKeys.length > 0;
 
+    // Current Session Data
+    const currentSession = activeSessions?.[courseId];
+    const isSessionActive = !!currentSession;
+    const timeLeft = isSessionActive ? currentSession.timeLeft : (customTime * 60);
+    const isActive = isSessionActive ? currentSession.isActive : false;
+    const isBreak = isSessionActive ? currentSession.isBreak : false;
+
+    const course = courseId ? findCourse(courseId) : null;
+    const courseProgress = courseId ? getCourseProgress(courseId) : null;
+
+    // Handle Timer Finish (Client-side check for notification/sound)
     useEffect(() => {
-        let interval = null;
-        if (isActive && timer > 0) {
-            interval = setInterval(() => {
-                setTimer((timer) => timer - 1);
-                // Accumulate session time (in minutes)
-                if (!isBreak) {
-                    sessionTimeRef.current += 1 / 60;
-                }
-            }, 1000);
-        } else if (timer === 0) {
-            setIsActive(false);
-            if (!isBreak) {
-                // Commit time when timer finishes
-                addStudyTime(courseId, Math.round(sessionTimeRef.current));
-                sessionTimeRef.current = 0;
-                setIsBreak(true);
-                setTimer(5 * 60);
-                new Notification("Focus time over! Take a break.");
+        if (isSessionActive && timeLeft === 0 && !isBreak) {
+            new Notification(`Focus time over for ${course?.title}! Take a break.`);
+            stopSession(courseId);
+            addStudyTime(courseId, currentSession.totalDuration);
+        }
+    }, [timeLeft, isSessionActive, isBreak, stopSession, addStudyTime, courseId, currentSession, course]);
+
+    const handleToggleTimer = () => {
+        if (isActive) {
+            pauseSession(courseId);
+        } else {
+            if (isSessionActive) {
+                resumeSession(courseId);
             } else {
-                setIsBreak(false);
-                setTimer(customTime * 60);
-                new Notification("Break over! Back to work.");
+                startSession(courseId, customTime);
             }
         }
-        return () => clearInterval(interval);
-    }, [isActive, timer, isBreak, customTime, courseId, addStudyTime]);
-
-    // Commit time when pausing or leaving
-    const handlePause = () => {
-        setIsActive(false);
-        if (sessionTimeRef.current > 0.5) { // Only save if > 30 seconds
-            addStudyTime(courseId, Math.round(sessionTimeRef.current));
-            sessionTimeRef.current = 0;
-        }
     };
 
-    const toggleTimer = () => {
-        if (isActive) {
-            handlePause();
-        } else {
-            setIsActive(true);
-        }
-    };
-
-    const resetTimer = () => {
-        handlePause(); // Save any pending time
-        setIsActive(false);
-        setIsBreak(false);
-        setTimer(customTime * 60);
+    const handleResetTimer = () => {
+        stopSession(courseId);
     };
 
     const formatTimer = (seconds) => {
@@ -170,20 +150,103 @@ export default function StudyMode() {
         setManualMinutes(60);
     };
 
-    if (!course) return <div className="text-[var(--text-primary)]">Course not found</div>;
+    // --- Render: Empty State / Session List ---
+    if (!courseId) {
+        return (
+            <div className="min-h-screen bg-[var(--bg-void)] text-[var(--text-primary)] p-8 flex flex-col items-center justify-center text-center">
+                <div className="max-w-md space-y-6 w-full">
+                    <div className="w-20 h-20 bg-[var(--glass-surface)] rounded-full flex items-center justify-center mx-auto mb-4 border border-[var(--glass-border)]">
+                        <LayoutDashboard size={40} className="text-[var(--text-secondary)]" />
+                    </div>
+                    <h1 className="text-3xl font-bold">Ready to Focus?</h1>
+
+                    {hasActiveSessions ? (
+                        <div className="bg-[var(--glass-surface)] rounded-xl border border-[var(--glass-border)] p-4 text-left">
+                            <h3 className="text-sm font-bold text-[var(--text-secondary)] uppercase mb-3">Active Sessions</h3>
+                            <div className="space-y-2">
+                                {activeSessionKeys.map(id => {
+                                    const s = activeSessions[id];
+                                    const c = findCourse(id);
+                                    return (
+                                        <Link
+                                            key={id}
+                                            to={`/study?id=${id}`}
+                                            className="flex items-center justify-between p-3 bg-[var(--bg-void)] rounded-lg hover:bg-[var(--glass-border)] transition-colors"
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                {s.isActive ? <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> : <div className="w-2 h-2 bg-yellow-500 rounded-full" />}
+                                                <span className="font-medium truncate max-w-[200px]">{c?.title || 'Unknown Course'}</span>
+                                            </div>
+                                            <span className="font-mono text-sm">{formatTimer(s.timeLeft)}</span>
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ) : (
+                        <p className="text-[var(--text-secondary)]">Select a course from your planner or curriculum to start a focus session.</p>
+                    )}
+
+                    <div className="flex gap-4 justify-center mt-8">
+                        <Link to="/planner" className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-colors">
+                            Go to Planner
+                        </Link>
+                        <Link to="/courses/ossu" className="px-6 py-3 bg-[var(--glass-surface)] hover:bg-[var(--glass-border)] border border-[var(--glass-border)] rounded-xl transition-colors">
+                            Browse Courses
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (!course) return <div className="text-[var(--text-primary)] p-8 text-center">Course not found. <Link to="/courses/ossu" className="underline">Go back</Link></div>;
 
     return (
-        <div className="min-h-screen bg-[var(--bg-void)] text-[var(--text-primary)] p-8 flex flex-col items-center">
+        <div className="min-h-screen bg-[var(--bg-void)] text-[var(--text-primary)] p-8 flex flex-col items-center relative">
 
             {/* Header */}
-            <div className="w-full max-w-4xl flex items-center justify-between mb-12">
+            <div className="w-full max-w-4xl flex items-center justify-between mb-12 relative z-10">
                 <button
-                    onClick={() => { handlePause(); navigate(-1); }}
+                    onClick={() => navigate(-1)}
                     className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                 >
                     <ArrowLeft size={20} /> Back
                 </button>
+
                 <div className="flex items-center gap-4">
+                    {/* Active Sessions Dropdown Trigger */}
+                    {hasActiveSessions && (
+                        <div className="relative">
+                            <button
+                                onClick={() => setShowSessionList(!showSessionList)}
+                                className="flex items-center gap-2 px-3 py-2 bg-[var(--glass-surface)] rounded-lg border border-[var(--glass-border)] text-sm hover:bg-[var(--glass-border)] transition-colors"
+                            >
+                                <List size={16} />
+                                <span>{activeSessionKeys.length} Active</span>
+                            </button>
+
+                            {showSessionList && (
+                                <div className="absolute top-full right-0 mt-2 w-64 bg-[var(--glass-surface)] backdrop-blur-xl border border-[var(--glass-border)] rounded-xl shadow-2xl p-2 z-50">
+                                    {activeSessionKeys.map(id => {
+                                        const s = activeSessions[id];
+                                        const c = findCourse(id);
+                                        return (
+                                            <Link
+                                                key={id}
+                                                to={`/study?id=${id}`}
+                                                onClick={() => setShowSessionList(false)}
+                                                className={`flex items-center justify-between p-2 rounded-lg transition-colors ${id === courseId ? 'bg-blue-500/20 text-blue-400' : 'hover:bg-[var(--bg-void)]'}`}
+                                            >
+                                                <span className="truncate text-sm max-w-[140px]">{c?.title}</span>
+                                                <span className="font-mono text-xs">{formatTimer(s.timeLeft)}</span>
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    )}
                     <AudioController />
                 </div>
             </div>
@@ -273,7 +336,6 @@ export default function StudyMode() {
                                 <div className="text-center">
                                     <button
                                         onClick={() => {
-                                            // Simple "Undo" / Reset logic for now - could be more complex later
                                             if (confirm("Reset progress for this course to 0?")) {
                                                 setStudyTime(courseId, 0);
                                                 setShowManualEntry(false);
@@ -295,22 +357,22 @@ export default function StudyMode() {
                     <div className="relative w-80 h-80 rounded-full bg-[var(--glass-surface)] border border-[var(--glass-border)] flex flex-col items-center justify-center backdrop-blur-xl shadow-2xl">
 
                         <div className="text-7xl font-mono font-bold tracking-tighter tabular-nums mb-4 text-[var(--text-primary)]" style={{ textShadow: '0 0 20px rgba(255,255,255,0.1)' }}>
-                            {formatTimer(timer)}
+                            {formatTimer(timeLeft)}
                         </div>
 
                         <div className="text-[var(--accent-glow)] font-medium tracking-widest uppercase text-sm mb-8">
-                            {isBreak ? 'Break Time' : 'Focus Session'}
+                            {isBreak ? 'Break Time' : (isActive ? 'Focus Session' : 'Ready')}
                         </div>
 
                         <div className="flex items-center gap-6">
                             <button
-                                onClick={toggleTimer}
+                                onClick={handleToggleTimer}
                                 className="w-16 h-16 rounded-full bg-[var(--text-primary)] text-[var(--bg-void)] flex items-center justify-center hover:scale-110 transition-transform shadow-lg shadow-[var(--text-primary)]/20"
                             >
                                 {isActive ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" className="ml-1" />}
                             </button>
                             <button
-                                onClick={resetTimer}
+                                onClick={handleResetTimer}
                                 className="w-12 h-12 rounded-full bg-[var(--glass-surface)] border border-[var(--glass-border)] text-[var(--text-secondary)] flex items-center justify-center hover:bg-[var(--text-primary)]/10 hover:text-[var(--text-primary)] transition-all"
                             >
                                 <RotateCcw size={20} />
@@ -347,7 +409,6 @@ export default function StudyMode() {
                             onChange={(e) => {
                                 const val = parseInt(e.target.value) || 25;
                                 setCustomTime(val);
-                                if (!isActive && !isBreak) setTimer(val * 60);
                             }}
                             className="w-16 bg-[var(--bg-void)] border border-[var(--glass-border)] rounded px-2 py-1 text-center focus:outline-none focus:border-[var(--accent-glow)]"
                         />

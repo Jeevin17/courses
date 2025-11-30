@@ -1,4 +1,4 @@
-/* eslint-env jest */
+/* eslint-env jest, node */
 import '@testing-library/jest-dom';
 
 // Mock ResizeObserver

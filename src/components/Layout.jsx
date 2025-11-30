@@ -1,18 +1,23 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, GraduationCap, LibraryBig, Sun, Moon, Network, Calendar, Settings as SettingsIcon } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, LibraryBig, Sun, Moon, Network, Calendar, Settings as SettingsIcon, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useOSSUStore } from '../hooks/useOSSUStore';
 
 export default function Layout({ children }) {
     const location = useLocation();
-    const { theme, toggleTheme } = useOSSUStore();
+    const { theme, toggleTheme, activeSessions, announcement, dismissAnnouncement } = useOSSUStore();
+
+    const activeSessionKeys = Object.keys(activeSessions || {});
+    const hasActiveSession = activeSessionKeys.length > 0;
+    const singleSessionId = activeSessionKeys.length === 1 ? activeSessionKeys[0] : null;
 
     const navItems = [
         { path: '/', label: 'Overview', icon: LayoutDashboard },
         { path: '/courses/ossu', label: 'Curriculum', icon: BookOpen },
         { path: '/planner', label: 'Planner', icon: Calendar },
         { path: '/graph', label: 'Network', icon: Network },
-        { path: '/study', label: 'Focus', icon: GraduationCap },
+        // Smart Link: If single session, go to it. If multiple or none, go to /study
+        { path: singleSessionId ? `/study?id=${singleSessionId}` : '/study', label: 'Focus', icon: GraduationCap },
         { path: '/settings', label: 'Settings', icon: SettingsIcon },
     ];
 
@@ -118,8 +123,26 @@ export default function Layout({ children }) {
                 </div>
             </nav>
 
+            {/* Announcement Banner */}
+            {announcement && (announcement.message || typeof announcement === 'string') && (
+                <div className={`fixed top-0 left-0 right-0 z-[60] text-white px-4 py-2 text-center text-sm font-medium flex items-center justify-center gap-4 shadow-lg ${(announcement.type === 'error' && 'bg-red-600') ||
+                    (announcement.type === 'warning' && 'bg-yellow-600') ||
+                    (announcement.type === 'success' && 'bg-green-600') ||
+                    'bg-blue-600'
+                    }`}>
+                    <span>{typeof announcement === 'string' ? announcement : announcement.message}</span>
+                    <button
+                        onClick={dismissAnnouncement}
+                        className="p-1 hover:bg-white/20 rounded-full transition-colors"
+                        title="Dismiss"
+                    >
+                        <X size={14} />
+                    </button>
+                </div>
+            )}
+
             {/* Main Content */}
-            <main className="w-full min-h-screen flex flex-col items-center justify-center relative z-10 p-6 pt-24 pb-24 md:pt-32 md:pb-12">
+            <main className={`w-full min-h-screen flex flex-col items-center justify-center relative z-10 p-6 pt-24 pb-24 md:pt-32 md:pb-12 ${announcement ? 'mt-8' : ''}`}>
                 {children}
             </main>
 

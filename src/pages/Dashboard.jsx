@@ -53,13 +53,20 @@ export default function Dashboard() {
             className="w-full max-w-4xl relative group space-y-8"
         >
             {/* Global Announcement */}
-            {announcement && (
+            {/* Global Announcement */}
+            {announcement && (announcement.message || typeof announcement === 'string') && (
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-2xl text-center"
+                    className={`p-4 rounded-2xl text-center border ${(announcement.type === 'error' && 'bg-red-500/10 border-red-500/20 text-red-400') ||
+                        (announcement.type === 'warning' && 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400') ||
+                        (announcement.type === 'success' && 'bg-green-500/10 border-green-500/20 text-green-400') ||
+                        'bg-blue-500/10 border-blue-500/20 text-blue-400'
+                        }`}
                 >
-                    <p className="text-sm text-blue-400 font-medium">{announcement}</p>
+                    <p className="text-sm font-medium">
+                        {typeof announcement === 'string' ? announcement : announcement.message}
+                    </p>
                 </motion.div>
             )}
 
