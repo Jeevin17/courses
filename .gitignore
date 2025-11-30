@@ -279,3 +279,5 @@ vite.config.ts.timestamp-*
 /src_backup
 DEPLOYMENT.md
 .DS_Store
+SUPABASE_SETUP.md
+ADMIN_SETUP.md
