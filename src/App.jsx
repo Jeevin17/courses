@@ -65,6 +65,7 @@ function App() {
                         <Suspense fallback={<PageLoader />}>
                             <Routes>
                                 <Route path="/" element={<Dashboard />} />
+                                <Route path="/courses" element={<CourseList />} />
                                 <Route path="/courses/:curriculumId" element={<CourseList />} />
                                 <Route path="/course/:courseId" element={<CourseDetail />} />
                                 <Route path="/study" element={<StudyMode />} />

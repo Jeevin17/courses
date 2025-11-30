@@ -9,7 +9,7 @@ export default function Layout({ children }) {
 
     const navItems = [
         { path: '/', label: 'Overview', icon: LayoutDashboard },
-        { path: '/courses', label: 'Curriculum', icon: BookOpen },
+        { path: '/courses/ossu', label: 'Curriculum', icon: BookOpen },
         { path: '/graph', label: 'Network', icon: Network },
         { path: '/study', label: 'Focus', icon: GraduationCap },
     ];
