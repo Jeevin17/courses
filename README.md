@@ -13,11 +13,15 @@
 
 A premium, privacy-focused learning tracker for self-taught developers and students. Track your progress through OSSU, Roadmap.sh, Physics, or any custom curriculum with a stunning "Liquid Mirror" interface.
 
-````carousel
-![Dark Mode - Course Tracker showcasing the Deep Onyx theme with glassmorphism UI](./assets/dark mode.png)
-<!-- slide -->
-![Light Mode - Course Tracker showcasing the Twilight Stone theme with soft aesthetics](./assets/light mode.png)
-````
+<div align="center">
+
+### 🌓 Dark & Light Mode
+
+| Dark Mode | Light Mode |
+|-----------|------------|
+| ![Dark Mode](./assets/dark%20mode.png) | ![Light Mode](./assets/light%20mode.png) |
+
+</div>
 
 ## ✨ Features
 
