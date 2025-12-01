@@ -2,7 +2,23 @@
  * Roadmap.sh Computer Science Curriculum
  * Enhanced with "child map" connections, engaging titles, and subtopics.
  */
-export const roadmapShData = [
+
+export interface RoadmapTopic {
+    id: string;
+    title: string;
+    status: 'locked' | 'unlocked' | 'completed' | 'in-progress';
+    url?: string;
+    prerequisites: string[];
+    subtopics: string[];
+}
+
+export interface RoadmapSection {
+    id: string;
+    title: string;
+    topics: RoadmapTopic[];
+}
+
+export const roadmapShData: RoadmapSection[] = [
     {
         "id": "sh-sec-1",
         "title": "Foundations",

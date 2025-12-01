@@ -20,13 +20,24 @@
         ]
     },
     "intro-cs-1": {
-        "overview": "Harvard University's introduction to the intellectual enterprises of computer science and the art of programming. This course teaches you how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development.",
-        "significance": "CS50 is widely considered one of the best introductions to computer science in the world. It provides a rigorous yet accessible foundation that is essential for anyone serious about a career in software engineering.",
+        "overview": "This course provides a comprehensive introduction to the fundamental concepts of computer science. You will learn how to think algorithmically and solve problems efficiently.",
+        "significance": "It lays the groundwork for all future CS studies, covering essential topics like abstraction, algorithms, data structures, and software engineering principles.",
         "whatYouWillLearn": [
-            "C, Python, SQL, and JavaScript",
-            "Algorithms and Data Structures",
-            "Web Development with Flask",
-            "Computer Science Fundamentals"
+            "Computational Thinking",
+            "Abstraction & Algorithms",
+            "Data Structures (Arrays, Linked Lists, Trees)",
+            "Resource Management",
+            "Software Engineering Principles"
+        ],
+        "subtopics": [
+            "Binary & Data Representation",
+            "Algorithms & Complexity",
+            "Memory Management",
+            "Data Structures",
+            "Web Development Basics",
+            "Python Programming",
+            "C Programming",
+            "SQL & Databases"
         ]
     },
     "intro-cs-2": {

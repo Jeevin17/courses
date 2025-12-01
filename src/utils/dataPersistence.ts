@@ -1,8 +1,8 @@
 /**
  * Exports the current application state to a JSON file.
- * @param {Object} data - The data to export (progress, notes, theme, etc.)
+ * @param data - The data to export (progress, notes, theme, etc.)
  */
-export const exportData = (data) => {
+export const exportData = (data: any): void => {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -16,10 +16,10 @@ export const exportData = (data) => {
 
 /**
  * Validates the imported data structure.
- * @param {Object} data - The data to validate
- * @returns {boolean} - True if valid, false otherwise
+ * @param data - The data to validate
+ * @returns True if valid, false otherwise
  */
-export const validateData = (data) => {
+export const validateData = (data: any): boolean => {
     if (!data || typeof data !== 'object') return false;
     // Basic check for required keys
     if (!data.progress && !data.notes) return false;
@@ -28,15 +28,20 @@ export const validateData = (data) => {
 
 /**
  * Reads and parses a JSON file.
- * @param {File} file - The file to import
- * @returns {Promise<Object>} - The parsed data
+ * @param file - The file to import
+ * @returns The parsed data
  */
-export const importData = (file) => {
+export const importData = (file: File): Promise<any> => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = (e) => {
             try {
-                const data = JSON.parse(e.target.result);
+                const result = e.target?.result;
+                if (typeof result !== 'string') {
+                    reject(new Error('Failed to read file content'));
+                    return;
+                }
+                const data = JSON.parse(result);
                 if (validateData(data)) {
                     resolve(data);
                 } else {

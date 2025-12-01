@@ -1,11 +1,11 @@
 /**
  * Parses duration and effort strings to estimate total course minutes.
  * 
- * @param {string} durationStr - e.g., "9 weeks", "12 weeks"
- * @param {string} effortStr - e.g., "15 hours/week", "8-10 hours/week"
- * @returns {number} Total estimated minutes
+ * @param durationStr - e.g., "9 weeks", "12 weeks"
+ * @param effortStr - e.g., "15 hours/week", "8-10 hours/week"
+ * @returns Total estimated minutes
  */
-export const parseDuration = (durationStr, effortStr) => {
+export const parseDuration = (durationStr: string, effortStr: string): number => {
     if (!durationStr || !effortStr) return 0;
 
     try {
@@ -34,10 +34,10 @@ export const parseDuration = (durationStr, effortStr) => {
 
 /**
  * Formats minutes into a readable string (e.g., "12h 30m")
- * @param {number} minutes 
- * @returns {string}
+ * @param minutes 
+ * @returns 
  */
-export const formatTime = (minutes) => {
+export const formatTime = (minutes: number): string => {
     if (!minutes) return "0m";
     const h = Math.floor(minutes / 60);
     const m = Math.floor(minutes % 60);

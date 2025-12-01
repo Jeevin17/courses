@@ -1,37 +1,55 @@
+# 🎓 Course Tracker (Liquid Mirror)
+
+A premium, privacy-focused learning tracker for self-taught developers and students. Track your progress through OSSU, Roadmap.sh, Physics, or any custom curriculum with a stunning "Liquid Mirror" interface.
+
+![Course Tracker](https://github.com/user-attachments/assets/placeholder-image)
+
 ## ✨ Features
 
-### 🧠 Interactive Neural Network Graph
-Visualize your learning journey with a stunning, force-directed graph.
-- **Dynamic Nodes**: Courses are represented as nodes that glow upon completion.
-- **Smart Edges**: Clearly see prerequisites and the optimal learning flow.
-- **Layered Progression**: Visual separation from Intro to Advanced topics.
+### 🎨 Liquid Mirror Design
+- **Glassmorphism UI**: A modern, translucent interface with "iOS 26" inspired aesthetics.
+- **Adaptive Themes**:
+  - **Light Mode**: "Twilight Stone" - Warm grey/purple tint for a soft, paper-like feel.
+  - **Dark Mode**: "Deep Onyx" - Rich charcoal backgrounds with glowing accents.
+- **Responsive**: Fully optimized for Desktop, Tablet, and Mobile (with a dedicated mobile bottom nav).
+
+### 🧠 Interactive Knowledge Graph
+- **Neural Network View**: Visualize your learning path as a force-directed graph.
+- **Dependency Tracking**: Clearly see prerequisites and unlockable courses.
+- **Smart Filtering**: Toggle between List and Graph views.
+
+### 📊 Advanced Analytics
+- **Personalized Stats**: Track your completion rates, study hours, and streaks.
+- **Skill Radar**: Visualize your proficiency across different subjects.
+- **Progress Projection**: Estimate your completion date based on velocity.
+- **Privacy First**: All analytics are calculated from your personal data.
 
 ### 🎯 Focus Mode
-A distraction-free environment built for deep work.
-- **Brown Noise Generator**: Integrated audio to mask background noise and improve concentration.
-- **Pomodoro Timer**: Customizable study timer to manage your sessions effectively.
-- **Auto-Tracking**: Study sessions automatically update your course progress.
+- **Distraction-Free**: A dedicated timer interface for deep work.
+- **Brown Noise**: Integrated audio masking to boost concentration.
+- **Session Tracking**: Automatically logs study time to your courses.
 
-### 📊 Comprehensive Progress Tracking
-- **Real-time Stats**: Track your completion percentage and study hours.
-- **Flexible Logging**: Automatic logging via Focus Mode or manual entry for offline study.
-- **Prerequisite Management**: Enforces learning order while allowing "Force Start" flexibility.
-- **Data Persistence**: All progress is saved locally—pick up exactly where you left off.
+### ☁️ Cloud Sync (Supabase)
+- **Cross-Device Sync**: Seamlessly sync your progress across devices.
+- **Secure**: Row Level Security (RLS) ensures only YOU can access your data.
+- **Offline Capable**: Works offline and syncs when back online.
 
 ## 🛠️ Tech Stack
 
-- **Frontend Framework**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with custom Glassmorphism effects
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Icons**: [Lucide React](https://lucide.dev/)
+- **Frontend**: React, TypeScript, Vite
+- **State Management**: Zustand, React Query
+- **Styling**: Tailwind CSS, Framer Motion
+- **Database**: Supabase (PostgreSQL)
+- **Icons**: Lucide React
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v16 or higher)
+- Node.js (v18+)
 - npm or yarn
+- A Supabase project (free tier)
 
-### Installation
+### Installation & Setup
 
 1. **Clone the repository**
    ```bash
@@ -44,36 +62,70 @@ A distraction-free environment built for deep work.
    npm install
    ```
 
-3. **Start the development server**
+3. **Environment Configuration**
+   - Create a `.env` file in the root directory.
+   - You can copy the example: `cp .env.example .env`
+   - Add your Supabase credentials:
+     ```env
+     VITE_SUPABASE_URL=your_project_url
+     VITE_SUPABASE_ANON_KEY=your_anon_key
+     ```
+
+4. **Database Setup**
+   - Go to your Supabase Dashboard -> SQL Editor.
+   - Copy the contents of `supabase/setup.sql`.
+   - Run the script to create the necessary tables and security policies.
+
+5. **Start Development Server**
    ```bash
    npm run dev
    ```
+   Open http://localhost:5173 to view it in the browser.
 
-4. **Build for production**
+### Building for Production
+
+1. **Create the Build**
    ```bash
    npm run build
    ```
+   This generates a `dist` folder containing the optimized assets.
 
-## 📖 Usage
+2. **Preview the Build Locally**
+   ```bash
+   npm run preview
+   ```
+   This spins up a local server to test the production build before deploying.
 
-1. **Select a Curriculum**: Choose between OSSU Computer Science, Physics, or other available roadmaps.
-2. **Explore the Graph**: Click on nodes to view course details and prerequisites.
-3. **Start Learning**: Click "Start Course" to begin tracking.
-4. **Enter Focus Mode**: Use the "Study" button to enter the distraction-free zone.
+3. **Deploy**
+   - Upload the `dist` folder to any static host (Vercel, Netlify, GitHub Pages, etc.).
+   - Ensure you add your Environment Variables (`VITE_SUPABASE_URL`, etc.) to your hosting provider's dashboard.
+
+## � Docker Deployment
+
+You can containerize the application for easy deployment.
+
+1. **Build the Image**
+   Pass your Supabase credentials as build arguments:
+   ```bash
+   docker build \
+     --build-arg VITE_SUPABASE_URL=your_url \
+     --build-arg VITE_SUPABASE_ANON_KEY=your_key \
+     -t course-tracker .
+   ```
+
+2. **Run the Container**
+   ```bash
+   docker run -d -p 8080:80 course-tracker
+   ```
+   Access the app at http://localhost:8080.
+
+## �📱 Mobile Experience
+- **Bottom Navigation**: A thumb-friendly fixed navigation bar.
+- **Floating Home**: Quick access to the dashboard.
+- **Theme Toggle**: Easily switch themes from the top header.
 
 ## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Contributions are welcome! Please fork the repo and submit a PR.
 
 ## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-*Built with ❤️ for the love of learning.(created with help of google antigravity)*
+MIT License. Built with ❤️ for the love of learning.

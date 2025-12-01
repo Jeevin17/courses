@@ -9,17 +9,17 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Memoized Header Component
-const CourseListHeader = memo(({ context }) => {
+const CourseListHeader = memo(({ context }: { context: any }) => {
     const { domain, track, navigate, searchTerm, setSearchTerm, activeFilter, setActiveFilter, flatCoursesCount } = context;
 
     return (
         <div className="flex flex-col gap-6 mb-8 w-full">
             <div className="flex flex-col md:flex-row justify-between items-end gap-4">
                 <div>
-                    <h1 className="text-4xl font-display font-bold tracking-tight text-[var(--text-primary)] mb-2">
+                    <h1 className="text-4xl font-display font-bold tracking-tight text-text-primary mb-2">
                         {domain === 'physics' ? 'Physics Curriculum' : 'Computer Science'}
                     </h1>
-                    <p className="text-[var(--text-secondary)] max-w-xl">
+                    <p className="text-text-secondary max-w-xl">
                         {domain === 'physics'
                             ? "A comprehensive path from basics to advanced physics."
                             : "Master computer science through structured open-source curriculums."}
@@ -27,12 +27,12 @@ const CourseListHeader = memo(({ context }) => {
                 </div>
 
                 {/* Domain Switcher */}
-                <div className="flex bg-[var(--glass-surface)] p-1 rounded-xl border border-[var(--glass-border)]">
+                <div className="flex bg-glass-surface p-1 rounded-xl border border-glass-border">
                     <button
                         onClick={() => navigate('/courses/ossu')}
                         className={`px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${domain === 'cs'
-                            ? 'bg-[var(--text-primary)] text-[var(--bg-void)] shadow-lg'
-                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                            ? 'bg-text-primary text-bg-void shadow-lg'
+                            : 'text-text-secondary hover:text-text-primary'
                             }`}
                     >
                         <Book size={16} /> Computer Science
@@ -40,8 +40,8 @@ const CourseListHeader = memo(({ context }) => {
                     <button
                         onClick={() => navigate('/courses/physics')}
                         className={`px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${domain === 'physics'
-                            ? 'bg-[var(--text-primary)] text-[var(--bg-void)] shadow-lg'
-                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                            ? 'bg-text-primary text-bg-void shadow-lg'
+                            : 'text-text-secondary hover:text-text-primary'
                             }`}
                     >
                         <Activity size={16} /> Physics
@@ -51,12 +51,12 @@ const CourseListHeader = memo(({ context }) => {
 
             {/* Sub-Navigation (CS Only) */}
             {domain === 'cs' && (
-                <div className="flex items-center gap-4 border-b border-[var(--text-primary)]/10 pb-1">
+                <div className="flex items-center gap-4 border-b border-text-primary/10 pb-1">
                     <button
                         onClick={() => navigate('/courses/ossu')}
                         className={`px-4 py-2 text-sm font-medium border-b-2 transition-all ${track === 'ossu'
                             ? 'border-blue-500 text-blue-400'
-                            : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                            : 'border-transparent text-text-secondary hover:text-text-primary'
                             }`}
                     >
                         OSSU Curriculum
@@ -65,7 +65,7 @@ const CourseListHeader = memo(({ context }) => {
                         onClick={() => navigate('/courses/roadmap-sh')}
                         className={`px-4 py-2 text-sm font-medium border-b-2 transition-all ${track === 'roadmap'
                             ? 'border-blue-500 text-blue-400'
-                            : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                            : 'border-transparent text-text-secondary hover:text-text-primary'
                             }`}
                     >
                         Roadmap.sh
@@ -74,17 +74,17 @@ const CourseListHeader = memo(({ context }) => {
             )}
 
             {/* Large Search & Filters */}
-            <div className="flex flex-col sm:flex-row justify-between w-full gap-4 items-center bg-[var(--glass-surface)] p-4 rounded-2xl border border-[var(--glass-border)]">
+            <div className="flex flex-col sm:flex-row justify-between w-full gap-4 items-center bg-glass-surface p-4 rounded-2xl border border-glass-border">
                 <div className="relative w-full sm:w-96">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-secondary)]" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary" />
                     <input
                         type="text"
                         placeholder="Search courses..."
-                        className="w-full h-10 pl-10 pr-4 rounded-xl bg-[var(--bg-void)] border border-[var(--glass-border)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-blue-500/50 transition-all placeholder-[var(--text-secondary)]/50"
+                        className="w-full h-10 pl-10 pr-4 rounded-xl bg-bg-void border border-glass-border text-sm text-text-primary focus:outline-none focus:border-blue-500/50 transition-all placeholder-text-secondary/50"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[var(--text-secondary)] font-mono">
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-text-secondary font-mono">
                         {flatCoursesCount} items
                     </div>
                 </div>
@@ -95,7 +95,7 @@ const CourseListHeader = memo(({ context }) => {
                             onClick={() => setActiveFilter(filter)}
                             className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${activeFilter === filter
                                 ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-                                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--text-primary)]/5'
+                                : 'text-text-secondary hover:text-text-primary hover:bg-text-primary/5'
                                 }`}
                         >
                             {filter.replace('-', ' ')}
@@ -108,7 +108,7 @@ const CourseListHeader = memo(({ context }) => {
 });
 
 // Circular Progress Component
-const CircularProgress = memo(({ percentage, size = 24, strokeWidth = 3, status }) => {
+const CircularProgress = memo(({ percentage, size = 24, strokeWidth = 3, status }: { percentage: number, size?: number, strokeWidth?: number, status: string }) => {
     const radius = (size - strokeWidth) / 2;
     const circumference = radius * 2 * Math.PI;
     const offset = circumference - (percentage / 100) * circumference;
@@ -127,7 +127,7 @@ const CircularProgress = memo(({ percentage, size = 24, strokeWidth = 3, status 
                     stroke="currentColor"
                     strokeWidth={strokeWidth}
                     fill="transparent"
-                    className="text-[var(--text-primary)]/10"
+                    className="text-text-primary/10"
                 />
                 <circle
                     cx={size / 2}
@@ -150,19 +150,19 @@ const CircularProgress = memo(({ percentage, size = 24, strokeWidth = 3, status 
 });
 
 // Memoized Course Card Component
-const CourseCard = memo(({ course, isUnlocked, status, progressPercent }) => {
+const CourseCard = memo(({ course, isUnlocked, status, progressPercent }: { course: any, isUnlocked: boolean, status: string, progressPercent: number }) => {
     return (
         <div className="pb-6"> {/* Spacing wrapper */}
             <Link
                 to={`/course/${course.id}`}
                 className={`group relative p-6 rounded-3xl border transition-all duration-300 flex flex-col justify-between min-h-[220px] h-full hover:-translate-y-1 hover:shadow-xl ${!isUnlocked
-                    ? 'bg-[var(--glass-surface)]/30 border-red-500/10 hover:border-red-500/30'
-                    : 'bg-[var(--glass-surface)] border-[var(--glass-border)] hover:border-blue-500/30'
+                    ? 'bg-glass-surface/30 border-red-500/10 hover:border-red-500/30'
+                    : 'bg-glass-surface border-glass-border hover:border-blue-500/30'
                     }`}
             >
                 <div>
                     <div className="flex justify-between items-start mb-4">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-secondary)] bg-[var(--text-primary)]/5 px-2 py-1 rounded-md">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-text-secondary bg-text-primary/5 px-2 py-1 rounded-md">
                             {course.provider || 'External'}
                         </span>
 
@@ -174,15 +174,15 @@ const CourseCard = memo(({ course, isUnlocked, status, progressPercent }) => {
                         )}
                     </div>
 
-                    <div className="mb-2 text-xs text-[var(--text-secondary)] opacity-50 uppercase tracking-widest font-bold">
+                    <div className="mb-2 text-xs text-text-secondary opacity-50 uppercase tracking-widest font-bold">
                         {course.sectionTitle}
                     </div>
 
-                    <h3 className={`font-bold text-lg leading-tight mb-3 ${!isUnlocked ? 'text-[var(--text-secondary)]' : 'text-[var(--text-primary)] group-hover:text-blue-400 transition-colors'}`}>
+                    <h3 className={`font-bold text-lg leading-tight mb-3 ${!isUnlocked ? 'text-text-secondary' : 'text-text-primary group-hover:text-blue-400 transition-colors'}`}>
                         {course.title}
                     </h3>
 
-                    <div className="flex flex-wrap gap-3 text-xs text-[var(--text-secondary)]">
+                    <div className="flex flex-wrap gap-3 text-xs text-text-secondary">
                         {course.duration && (
                             <div className="flex items-center gap-1"><Clock className="h-3 w-3" /> {course.duration}</div>
                         )}
@@ -192,7 +192,7 @@ const CourseCard = memo(({ course, isUnlocked, status, progressPercent }) => {
                     </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[var(--text-primary)]/5 flex items-center justify-between text-xs font-medium text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
+                <div className="mt-6 pt-4 border-t border-text-primary/5 flex items-center justify-between text-xs font-medium text-text-secondary group-hover:text-text-primary transition-colors">
                     <span>View Details</span>
                     <ArrowUpRight size={14} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </div>
@@ -222,7 +222,7 @@ export default function CourseList() {
 
     // Handle scroll for compact search overlay - Debounced
     useEffect(() => {
-        let timeoutId;
+        let timeoutId: any;
         const handleScroll = () => {
             if (timeoutId) return;
             timeoutId = setTimeout(() => {
@@ -248,10 +248,10 @@ export default function CourseList() {
 
     // Flatten and filter data
     const flatCourses = useMemo(() => {
-        const items = [];
-        currentData.forEach(section => {
+        const items: any[] = [];
+        currentData.forEach((section: any) => {
             const sectionItems = [...(section.courses || []), ...(section.topics || [])];
-            sectionItems.forEach(item => {
+            sectionItems.forEach((item: any) => {
                 const status = progress[item.id]?.status || 'todo';
                 const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     section.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -287,14 +287,14 @@ export default function CourseList() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="fixed top-20 left-4 right-4 md:top-6 md:left-auto md:right-6 md:w-auto z-50 flex items-center bg-[var(--glass-surface)] p-2 rounded-full border border-[var(--glass-border)] shadow-2xl backdrop-blur-xl border-blue-500/20"
+                        className="fixed top-20 left-4 right-4 md:top-6 md:left-auto md:right-6 md:w-auto z-50 flex items-center bg-glass-surface p-2 rounded-full border border-glass-border shadow-2xl backdrop-blur-xl border-blue-500/20"
                     >
                         <div className="relative w-full md:w-48">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[var(--text-secondary)]" />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-text-secondary" />
                             <input
                                 type="text"
                                 placeholder="Search..."
-                                className="w-full h-8 pl-9 pr-4 rounded-xl bg-[var(--bg-void)] border border-[var(--glass-border)] text-xs text-[var(--text-primary)] focus:outline-none focus:border-blue-500/50 transition-all placeholder-[var(--text-secondary)]/50"
+                                className="w-full h-8 pl-9 pr-4 rounded-xl bg-bg-void border border-glass-border text-xs text-text-primary focus:outline-none focus:border-blue-500/50 transition-all placeholder-text-secondary/50"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
@@ -335,7 +335,7 @@ export default function CourseList() {
                             <div className="flex justify-center">
                                 <button
                                     onClick={handleLoadMore}
-                                    className="px-8 py-3 rounded-full bg-[var(--glass-surface)] border border-[var(--glass-border)] text-[var(--text-primary)] font-bold hover:bg-[var(--text-primary)] hover:text-[var(--bg-void)] transition-all shadow-lg hover:scale-105 active:scale-95"
+                                    className="px-8 py-3 rounded-full bg-glass-surface border border-glass-border text-text-primary font-bold hover:bg-text-primary hover:text-bg-void transition-all shadow-lg hover:scale-105 active:scale-95"
                                 >
                                     Load More ({flatCourses.length - visibleCount} remaining)
                                 </button>
@@ -344,11 +344,11 @@ export default function CourseList() {
                     </>
                 ) : (
                     <div className="flex flex-col items-center justify-center text-center opacity-50 py-20">
-                        <div className="w-16 h-16 rounded-full bg-[var(--text-primary)]/5 flex items-center justify-center mb-4">
-                            <Search className="h-6 w-6 text-[var(--text-secondary)]" />
+                        <div className="w-16 h-16 rounded-full bg-text-primary/5 flex items-center justify-center mb-4">
+                            <Search className="h-6 w-6 text-text-secondary" />
                         </div>
-                        <h3 className="text-lg font-medium text-[var(--text-primary)]">No courses found</h3>
-                        <p className="text-[var(--text-secondary)]">Try adjusting your search or filters.</p>
+                        <h3 className="text-lg font-medium text-text-primary">No courses found</h3>
+                        <p className="text-text-secondary">Try adjusting your search or filters.</p>
                     </div>
                 )}
             </div>

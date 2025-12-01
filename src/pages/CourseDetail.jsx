@@ -170,6 +170,25 @@ export default function CourseDetail() {
                             </ul>
                         </section>
                     )}
+
+                    {/* AI Generated Sub-topics */}
+                    {(course.subtopics || aiInfo.subtopics) && (
+                        <section className="space-y-4">
+                            <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+                                AI Generated Sub-topics
+                            </h2>
+                            <div className="grid md:grid-cols-2 gap-4">
+                                {(course.subtopics || aiInfo.subtopics).map((topic, i) => (
+                                    <div key={i} className="p-4 rounded-xl bg-[var(--glass-surface)] border border-[var(--glass-border)] hover:border-purple-500/30 transition-colors group">
+                                        <h3 className="font-medium text-[var(--text-primary)] group-hover:text-purple-400 transition-colors">
+                                            {typeof topic === 'string' ? topic : topic.title}
+                                        </h3>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
                 </div>
 
                 {/* Sidebar / Metadata */}

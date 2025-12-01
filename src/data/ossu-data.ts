@@ -1,4 +1,19 @@
-export const ossuData = [
+export interface Course {
+    id: string;
+    title: string;
+    provider: string;
+    url: string;
+    duration: string;
+    effort: string;
+}
+
+export interface Section {
+    id: string;
+    title: string;
+    courses: Course[];
+}
+
+export const ossuData: Section[] = [
     {
         id: 'prerequisites',
         title: 'Prerequisites',

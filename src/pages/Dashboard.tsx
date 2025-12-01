@@ -1,26 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useOSSUStore } from '../hooks/useOSSUStore';
 import { ossuData } from '../data/ossu-data';
-import { exportData, importData } from '../utils/dataPersistence';
-import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, CheckCircle, Activity, ArrowRight, Sparkles, Play, Settings, Clock, Calendar, Atom, Book, Download, Upload, FileJson, Flame, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { BookOpen, CheckCircle, Activity, Sparkles, Play, Atom, Book, Flame, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { ResponsiveContainer, XAxis, Tooltip, Area, AreaChart, Line } from 'recharts';
 import { roadmapShData } from '../data/roadmap-sh-data';
 import { physicsData } from '../data/physics-data';
+import { ReadyToStudy } from '../features/dashboard/ReadyToStudy';
+import { ProgressAnalytics } from '../features/dashboard/ProgressAnalytics';
 
 export default function Dashboard() {
-    const { progress, theme, toggleTheme, importState, streak, badges, weeklyHours, announcement } = useOSSUStore();
+    const { progress, streak, badges, weeklyHours, announcement } = useOSSUStore();
     const [activeCurriculum, setActiveCurriculum] = useState('ossu'); // 'ossu', 'roadmap-sh', 'physics'
 
     // --- Data Calculation ---
     const currentData = activeCurriculum === 'ossu' ? ossuData :
         activeCurriculum === 'physics' ? physicsData : roadmapShData;
 
-    const allCourses = currentData.flatMap(section => section.courses || section.topics || []);
+    const allCourses = currentData.flatMap((section: any) => section.courses || section.topics || []);
     const totalCourses = allCourses.length;
-    const completedCourses = allCourses.filter(c => progress[c.id]?.status === 'completed').length;
-    const inProgressCourses = allCourses.filter(c => progress[c.id]?.status === 'in-progress').length;
+    const completedCourses = allCourses.filter((c: any) => progress[c.id]?.status === 'completed').length;
+    const inProgressCourses = allCourses.filter((c: any) => progress[c.id]?.status === 'in-progress').length;
     const completionRate = Math.round((completedCourses / totalCourses) * 100) || 0;
 
     const AVG_COURSE_HOURS = 60;
@@ -53,7 +54,6 @@ export default function Dashboard() {
             className="w-full max-w-4xl relative group space-y-8"
         >
             {/* Global Announcement */}
-            {/* Global Announcement */}
             {announcement && (announcement.message || typeof announcement === 'string') && (
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
@@ -71,42 +71,46 @@ export default function Dashboard() {
             )}
 
             {/* Central Portal */}
-            <div className="glass-portal rounded-[40px] overflow-hidden flex flex-col items-center text-center p-8 md:p-12 transition-all duration-700 group-hover:border-[var(--text-primary)]/20 group-hover:shadow-[0_0_100px_-20px_var(--accent-glow)] relative">
-
-
+            <div className="glass-portal rounded-[40px] overflow-hidden flex flex-col items-center text-center p-8 md:p-12 transition-all duration-700 group-hover:border-text-primary/20 group-hover:shadow-[0_0_100px_-20px_var(--accent-glow)] relative">
 
                 {/* Hero Section */}
-                <div className="relative z-20 space-y-6 mb-12">
+                <div className="relative z-20 space-y-6 mb-12 w-full max-w-4xl">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--text-primary)]/5 border border-[var(--text-primary)]/10 text-xs font-medium text-blue-400 tracking-wider uppercase"
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-text-primary/5 border border-text-primary/10 text-xs font-medium text-blue-400 tracking-wider uppercase"
                     >
                         <Sparkles size={12} /> {activeCurriculum === 'physics' ? 'Physics Tracker' : 'Computer Science Tracker'}
                     </motion.div>
+
+                    {/* Ready To Study Recommendations */}
+                    <div className="w-full text-left mb-8">
+                        <ReadyToStudy />
+                    </div>
+
                     {/* Curriculum Selector */}
-                    <div className="flex flex-col items-center gap-4 mb-8 w-full max-w-md">
+                    <div className="flex flex-col items-center gap-4 mb-8 w-full max-w-md mx-auto">
                         {/* Computer Science Subtree */}
-                        <div className="w-full bg-[var(--text-primary)]/5 rounded-2xl p-4 border border-[var(--text-primary)]/10">
+                        <div className="w-full bg-text-primary/5 rounded-2xl p-4 border border-text-primary/10">
                             <div className="flex items-center gap-2 mb-3 px-2">
                                 <div className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
                                     <Book size={16} />
                                 </div>
-                                <span className="text-sm font-bold text-[var(--text-primary)] tracking-wide">Computer Science</span>
+                                <span className="text-sm font-bold text-text-primary tracking-wide">Computer Science</span>
                             </div>
                             <div className="flex gap-2 pl-2">
-                                <div className="w-0.5 bg-[var(--text-primary)]/10 rounded-full my-1 ml-3 mr-3"></div>
+                                <div className="w-0.5 bg-text-primary/10 rounded-full my-1 ml-3 mr-3"></div>
                                 <div className="flex flex-col gap-2 w-full">
                                     <button
                                         onClick={() => setActiveCurriculum('ossu')}
                                         className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between group ${activeCurriculum === 'ossu'
-                                            ? 'bg-[var(--text-primary)]/10 text-[var(--text-primary)] shadow-sm border border-[var(--text-primary)]/10'
-                                            : 'hover:bg-[var(--text-primary)]/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                                            ? 'bg-text-primary/10 text-text-primary shadow-sm border border-text-primary/10'
+                                            : 'hover:bg-text-primary/5 text-text-secondary hover:text-text-primary'
                                             }`}
                                     >
                                         <span className="flex items-center gap-2">
-                                            <span className={`w-1.5 h-1.5 rounded-full ${activeCurriculum === 'ossu' ? 'bg-blue-400' : 'bg-[var(--text-secondary)]/30'}`}></span>
+                                            <span className={`w-1.5 h-1.5 rounded-full ${activeCurriculum === 'ossu' ? 'bg-blue-400' : 'bg-text-secondary/30'}`}></span>
                                             OSSU Curriculum
                                         </span>
                                         {activeCurriculum === 'ossu' && <CheckCircle size={14} className="text-blue-400" />}
@@ -114,12 +118,12 @@ export default function Dashboard() {
                                     <button
                                         onClick={() => setActiveCurriculum('roadmap-sh')}
                                         className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between group ${activeCurriculum === 'roadmap-sh'
-                                            ? 'bg-[var(--text-primary)]/10 text-[var(--text-primary)] shadow-sm border border-[var(--text-primary)]/10'
-                                            : 'hover:bg-[var(--text-primary)]/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                                            ? 'bg-text-primary/10 text-text-primary shadow-sm border border-text-primary/10'
+                                            : 'hover:bg-text-primary/5 text-text-secondary hover:text-text-primary'
                                             }`}
                                     >
                                         <span className="flex items-center gap-2">
-                                            <span className={`w-1.5 h-1.5 rounded-full ${activeCurriculum === 'roadmap-sh' ? 'bg-blue-400' : 'bg-[var(--text-secondary)]/30'}`}></span>
+                                            <span className={`w-1.5 h-1.5 rounded-full ${activeCurriculum === 'roadmap-sh' ? 'bg-blue-400' : 'bg-text-secondary/30'}`}></span>
                                             Roadmap.sh
                                         </span>
                                         {activeCurriculum === 'roadmap-sh' && <CheckCircle size={14} className="text-blue-400" />}
@@ -129,25 +133,25 @@ export default function Dashboard() {
                         </div>
 
                         {/* Physics Subtree */}
-                        <div className="w-full bg-[var(--text-primary)]/5 rounded-2xl p-4 border border-[var(--text-primary)]/10">
+                        <div className="w-full bg-text-primary/5 rounded-2xl p-4 border border-text-primary/10">
                             <div className="flex items-center gap-2 mb-3 px-2">
                                 <div className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
                                     <Atom size={16} />
                                 </div>
-                                <span className="text-sm font-bold text-[var(--text-primary)] tracking-wide">Physics</span>
+                                <span className="text-sm font-bold text-text-primary tracking-wide">Physics</span>
                             </div>
                             <div className="flex gap-2 pl-2">
-                                <div className="w-0.5 bg-[var(--text-primary)]/10 rounded-full my-1 ml-3 mr-3"></div>
+                                <div className="w-0.5 bg-text-primary/10 rounded-full my-1 ml-3 mr-3"></div>
                                 <div className="flex flex-col gap-2 w-full">
                                     <button
                                         onClick={() => setActiveCurriculum('physics')}
                                         className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between group ${activeCurriculum === 'physics'
-                                            ? 'bg-[var(--text-primary)]/10 text-[var(--text-primary)] shadow-sm border border-[var(--text-primary)]/10'
-                                            : 'hover:bg-[var(--text-primary)]/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                                            ? 'bg-text-primary/10 text-text-primary shadow-sm border border-text-primary/10'
+                                            : 'hover:bg-text-primary/5 text-text-secondary hover:text-text-primary'
                                             }`}
                                     >
                                         <span className="flex items-center gap-2">
-                                            <span className={`w-1.5 h-1.5 rounded-full ${activeCurriculum === 'physics' ? 'bg-purple-400' : 'bg-[var(--text-secondary)]/30'}`}></span>
+                                            <span className={`w-1.5 h-1.5 rounded-full ${activeCurriculum === 'physics' ? 'bg-purple-400' : 'bg-text-secondary/30'}`}></span>
                                             Standard Curriculum
                                         </span>
                                         {activeCurriculum === 'physics' && <CheckCircle size={14} className="text-purple-400" />}
@@ -157,36 +161,73 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tighter text-[var(--text-primary)] text-glow">
+                    <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tighter text-text-primary">
                         Your Path<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-b from-[var(--text-primary)] to-[var(--text-primary)]/40">To Mastery</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-b from-text-primary to-text-primary/40">To Mastery</span>
                     </h1>
 
-                    <div className="flex items-center justify-center gap-12 pt-4">
+                    <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 pt-4">
                         <div className="text-center">
-                            <div className="text-6xl font-bold tracking-tighter text-[var(--text-primary)]/90">{completionRate}%</div>
-                            <div className="text-xs text-[var(--text-secondary)] uppercase tracking-widest mt-1">Completed</div>
+                            <div className="text-4xl md:text-6xl font-bold tracking-tighter text-text-primary/90">{completionRate}%</div>
+                            <div className="text-xs text-text-secondary uppercase tracking-widest mt-1">Completed</div>
                         </div>
-                        <div className="w-px h-16 bg-[var(--text-primary)]/10"></div>
+                        <div className="w-px h-12 md:h-16 bg-text-primary/10"></div>
                         <div className="text-center">
-                            <div className="text-6xl font-bold tracking-tighter text-[var(--text-primary)]/90">{weeksToCompletion}</div>
-                            <div className="text-xs text-[var(--text-secondary)] uppercase tracking-widest mt-1">Weeks Left</div>
+                            <div className="text-4xl md:text-6xl font-bold tracking-tighter text-text-primary/90">{weeksToCompletion}</div>
+                            <div className="text-xs text-text-secondary uppercase tracking-widest mt-1">Weeks Left</div>
+                        </div>
+                    </div>
+
+                    {/* Streak Pill (Restored) */}
+                    <div className="flex justify-center pt-6">
+                        <div className="flex items-center gap-2 px-5 py-2.5 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-500 font-bold shadow-sm hover:scale-105 transition-transform cursor-default">
+                            <Flame size={20} fill="currentColor" />
+                            <span>{streak} Day Streak</span>
                         </div>
                     </div>
                 </div>
 
-                {/* Gamification Stats */}
-                <div className="flex items-center justify-center gap-4 mb-8">
-                    <div className="flex items-center gap-2 px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-bold">
-                        <Flame size={18} fill="currentColor" />
-                        <span>{streak} Day Streak</span>
+                {/* Analytics Section */}
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 relative z-20">
+                    {/* Projection Graph */}
+                    <div className="h-64">
+                        <h3 className="text-sm font-medium text-text-secondary mb-4 flex items-center justify-center gap-2">
+                            <Activity size={16} className="text-blue-400" /> Projected Completion
+                        </h3>
+                        <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={graphData}>
+                                <defs>
+                                    <linearGradient id="colorProjected" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                                    </linearGradient>
+                                </defs>
+                                <XAxis dataKey="name" stroke="var(--text-secondary)" tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} tickLine={false} axisLine={false} />
+                                <Tooltip
+                                    contentStyle={{
+                                        backgroundColor: 'var(--bg-void)',
+                                        borderColor: 'var(--glass-border)',
+                                        borderRadius: '12px',
+                                        color: 'var(--text-primary)'
+                                    }}
+                                    itemStyle={{ color: 'var(--text-primary)' }}
+                                />
+                                <Area type="monotone" dataKey="projected" stroke="#3b82f6" strokeWidth={2} fillOpacity={1} fill="url(#colorProjected)" />
+                                <Line type="monotone" dataKey="actual" stroke="var(--text-primary)" strokeWidth={3} dot={{ r: 4, fill: 'var(--text-primary)' }} />
+                            </AreaChart>
+                        </ResponsiveContainer>
+                    </div>
+
+                    {/* Skill Radar */}
+                    <div className="h-64">
+                        <ProgressAnalytics activeCurriculum={activeCurriculum} />
                     </div>
                 </div>
 
                 {/* Badges Section */}
                 {badges.length > 0 && (
-                    <div className="mb-8 p-4 bg-[var(--glass-surface)] border border-[var(--glass-border)] rounded-2xl inline-block">
-                        <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-3 flex items-center justify-center gap-2">
+                    <div className="mb-8 p-4 bg-glass-surface border border-glass-border rounded-2xl inline-block">
+                        <h3 className="text-xs font-bold text-text-secondary uppercase tracking-widest mb-3 flex items-center justify-center gap-2">
                             <Award size={14} /> Achievements
                         </h3>
                         <div className="flex justify-center gap-3">
@@ -209,38 +250,9 @@ export default function Dashboard() {
                     </div>
                 )}
 
-                {/* Projection Graph */}
-                <div className="w-full h-64 relative z-20 mb-8">
-                    <h3 className="text-sm font-medium text-[var(--text-secondary)] mb-4 flex items-center justify-center gap-2">
-                        <Activity size={16} className="text-blue-400" /> Projected Completion
-                    </h3>
-                    <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={graphData}>
-                            <defs>
-                                <linearGradient id="colorProjected" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-                                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
-                                </linearGradient>
-                            </defs>
-                            <XAxis dataKey="name" stroke="var(--text-secondary)" tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} tickLine={false} axisLine={false} />
-                            <Tooltip
-                                contentStyle={{
-                                    backgroundColor: 'var(--bg-void)',
-                                    borderColor: 'var(--glass-border)',
-                                    borderRadius: '12px',
-                                    color: 'var(--text-primary)'
-                                }}
-                                itemStyle={{ color: 'var(--text-primary)' }}
-                            />
-                            <Area type="monotone" dataKey="projected" stroke="#3b82f6" strokeWidth={2} fillOpacity={1} fill="url(#colorProjected)" />
-                            <Line type="monotone" dataKey="actual" stroke="var(--text-primary)" strokeWidth={3} dot={{ r: 4, fill: 'var(--text-primary)' }} />
-                        </AreaChart>
-                    </ResponsiveContainer>
-                </div>
-
                 {/* Ghost Actions */}
                 <div className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-md z-20">
-                    <Link to={`/courses/${activeCurriculum}`} className="w-full btn h-12 rounded-full bg-[var(--text-primary)]/5 hover:bg-[var(--text-primary)]/10 border border-[var(--text-primary)]/10 text-[var(--text-primary)] font-medium flex items-center justify-center gap-2 transition-all">
+                    <Link to={`/courses/${activeCurriculum}`} className="w-full btn h-12 rounded-full bg-text-primary/5 hover:bg-text-primary/10 border border-text-primary/10 text-text-primary font-medium flex items-center justify-center gap-2 transition-all">
                         <BookOpen size={18} /> Browse Curriculum
                     </Link>
                     {inProgressCourses > 0 && (

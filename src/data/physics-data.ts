@@ -1,5 +1,18 @@
+export interface PhysicsTopic {
+    id: string;
+    title: string;
+    status: 'locked' | 'unlocked' | 'completed' | 'in-progress';
+    prerequisites: string[];
+    subtopics: string[];
+}
 
-export const physicsData = [
+export interface PhysicsSection {
+    id: string;
+    title: string;
+    topics: PhysicsTopic[];
+}
+
+export const physicsData: PhysicsSection[] = [
     {
         id: "phy-A",
         title: "Mechanics",

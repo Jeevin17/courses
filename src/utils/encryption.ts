@@ -4,7 +4,7 @@
 const ALGORITHM = 'AES-GCM';
 
 // Derive a key from user's password/email (in production, use a proper key derivation function)
-async function deriveKey(password) {
+async function deriveKey(password: string): Promise<CryptoKey> {
     const encoder = new TextEncoder();
     const keyMaterial = await crypto.subtle.importKey(
         'raw',
@@ -28,7 +28,7 @@ async function deriveKey(password) {
     );
 }
 
-export async function encryptData(data, userEmail) {
+export async function encryptData(data: any, userEmail: string): Promise<string> {
     try {
         const key = await deriveKey(userEmail);
         const encoder = new TextEncoder();
@@ -53,7 +53,7 @@ export async function encryptData(data, userEmail) {
     }
 }
 
-export async function decryptData(encryptedString, userEmail) {
+export async function decryptData(encryptedString: string, userEmail: string): Promise<any> {
     try {
         const key = await deriveKey(userEmail);
 

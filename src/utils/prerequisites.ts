@@ -1,7 +1,7 @@
-import { ossuData } from '../data/ossu-data.js';
+import { ossuData, Course } from '../data/ossu-data';
 
 // Define section-level dependencies
-const SECTION_DEPENDENCIES = {
+const SECTION_DEPENDENCIES: Record<string, string[]> = {
     'core-theory': ['core-math'],
     'advanced-systems': ['prerequisites'], // Requires Physics
     'advanced-programming': ['core-programming', 'core-math', 'core-systems', 'core-theory', 'core-security', 'core-applications', 'core-ethics'],
@@ -16,7 +16,7 @@ const SECTION_DEPENDENCIES = {
  * @param {string} courseId 
  * @returns {object|null} The prerequisite object { title, id (optional) } or null.
  */
-export const getPrerequisite = (courseId) => {
+export const getPrerequisite = (courseId: string): { title: string; id?: string } | Course | null => {
     for (const section of ossuData) {
         // Check if this course belongs to a section with dependencies
         if (section.courses.some(c => c.id === courseId)) {
@@ -62,8 +62,7 @@ export const getPrerequisite = (courseId) => {
  * @param {object} progress The progress object from the store.
  * @returns {boolean} True if prerequisites are met (or none exist), false otherwise.
  */
-export const checkPrerequisites = (courseId, progress) => {
-    // Find the section this course belongs to
+export const checkPrerequisites = (courseId: string, progress: Record<string, { status: string }>): boolean => {
     // Find the section this course belongs to
     const section = ossuData.find(s => (s.courses || []).some(c => c.id === courseId));
     if (!section) return true;
