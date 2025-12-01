@@ -220,20 +220,28 @@ export default function CourseList() {
         }
     }, [curriculumId, navigate]);
 
-    // Handle scroll for compact search overlay - Debounced
+    // Handle scroll for compact search overlay - Optimized with requestAnimationFrame
     useEffect(() => {
-        let timeoutId: any;
+        let rafId: number | null = null;
+        let lastScrollY = window.scrollY;
+
         const handleScroll = () => {
-            if (timeoutId) return;
-            timeoutId = setTimeout(() => {
-                setIsScrolled(window.scrollY > 150);
-                timeoutId = null;
-            }, 100); // Check every 100ms
+            if (rafId !== null) return;
+
+            rafId = requestAnimationFrame(() => {
+                const currentScrollY = window.scrollY;
+                if (Math.abs(currentScrollY - lastScrollY) > 10) {
+                    setIsScrolled(currentScrollY > 150);
+                    lastScrollY = currentScrollY;
+                }
+                rafId = null;
+            });
         };
-        window.addEventListener('scroll', handleScroll);
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            if (timeoutId) clearTimeout(timeoutId);
+            if (rafId !== null) cancelAnimationFrame(rafId);
         };
     }, []);
 
@@ -309,7 +317,10 @@ export default function CourseList() {
 
                 {visibleCourses.length > 0 ? (
                     <>
-                        <div className="flex flex-wrap gap-6 mb-12">
+                        <div
+                            className="flex flex-wrap gap-6 mb-12"
+                            style={{ contain: 'layout style paint' }}
+                        >
                             {visibleCourses.map((course) => {
                                 // We need to calculate these here to pass as props, or inside the component.
                                 // Calculating here allows us to memoize the component based on props.

@@ -28,7 +28,10 @@ export default function Layout({ children }: LayoutProps) {
     ];
 
     return (
-        <div className="min-h-screen font-sans text-text-primary relative flex flex-col items-center overflow-x-hidden transition-colors duration-500">
+        <div
+            className="min-h-screen font-sans text-text-primary relative flex flex-col items-center overflow-x-hidden transition-colors duration-500"
+            style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
+        >
 
             {/* Cinematic Container / Void Background */}
             <div className="void-bg">

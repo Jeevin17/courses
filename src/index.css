@@ -39,6 +39,11 @@
     --void-mesh-2: #000000;
 }
 
+/* Smooth scrolling optimization */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--bg-void);
     color: var(--text-primary);
@@ -52,6 +57,9 @@ body {
             transparent 30%,
             transparent 70%,
             rgba(91, 70, 232, 0.05) 100%);
+    /* GPU acceleration for smooth scrolling */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 /* Dark Mode Gradient: Blue edges */
@@ -63,16 +71,52 @@ body {
             rgba(10, 132, 255, 0.04) 100%);
 }
 
-/* iOS 26 Liquid Glass Card */
+/* iOS 26 Liquid Glass Card - Enhanced with performance in mind */
 .glass-portal {
     background: var(--glass-surface);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--glass-border);
+    /* Enhanced multi-layer shadow for depth */
     box-shadow:
         0 8px 32px 0 var(--glass-shadow),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        0 1px 2px 0 rgba(0, 0, 0, 0.05),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* GPU acceleration */
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    /* Subtle gradient border effect */
+    position: relative;
+}
+
+.glass-portal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* Enhanced hover state for interactive glass elements */
+.glass-portal:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow:
+        0 12px 40px 0 var(--glass-shadow),
+        0 2px 4px 0 rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
 }
 
 /* High Contrast Mirror Button - Floating */
