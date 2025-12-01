@@ -1,8 +1,23 @@
 # 🎓 Course Tracker (Liquid Mirror)
 
+<div align="center">
+
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+</div>
+
 A premium, privacy-focused learning tracker for self-taught developers and students. Track your progress through OSSU, Roadmap.sh, Physics, or any custom curriculum with a stunning "Liquid Mirror" interface.
 
-![Course Tracker](https://github.com/user-attachments/assets/placeholder-image)
+````carousel
+![Dark Mode - Course Tracker showcasing the Deep Onyx theme with glassmorphism UI](./assets/dark mode.png)
+<!-- slide -->
+![Light Mode - Course Tracker showcasing the Twilight Stone theme with soft aesthetics](./assets/light mode.png)
+````
 
 ## ✨ Features
 
